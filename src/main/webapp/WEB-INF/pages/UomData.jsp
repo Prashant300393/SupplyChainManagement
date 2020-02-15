@@ -9,7 +9,7 @@
 <body>
 <c:choose>
 <c:when test="${!empty list }">
-<table border="1">
+<table border="1" align="center">
 <tr>
 	<th>ID</th>
 	<th>TYPE</th>
