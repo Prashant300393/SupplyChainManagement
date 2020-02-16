@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amdocs.model.Uom;
 import com.amdocs.service.IUomService;
@@ -60,6 +61,28 @@ public class UomController {
 	@RequestMapping("/all")	// GET
 	public String getAllUoms(Model model)
 	{
+		List<Uom> list = service.getAllUoms();
+		model.addAttribute("list", list);
+		return "UomData";
+	}
+	
+	/**
+	 * 4.  Deleting or Editing 1 Row using URL Rewriting (Static path & Dynamic Path)
+	 *      ===>REQUEST : delete?uid=1
+	 *  
+	 *     Read the Key using @RequestParam & DISPLAY Remaining Data on Same UI using  Model
+	 *     URL : /delete , TYPE : GET , method = deleteUom()
+	 */
+	@RequestMapping("/delete")		//GET
+	public String deleteUom(
+			@RequestParam("uid")Integer id,
+			Model model
+			)
+	{
+		service.deleteUom(id);
+		String msg = "Uom ' "+id+" ' Deleted";
+		model.addAttribute("msg", msg);
+		//Fetching All new Data After Deletion
 		List<Uom> list = service.getAllUoms();
 		model.addAttribute("list", list);
 		return "UomData";

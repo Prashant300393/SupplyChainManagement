@@ -24,4 +24,9 @@ public class UomDaoImpl implements IUomDao{
 	public List<Uom> getAllUoms() {
 		return ht.loadAll(Uom.class);
 	}
+	
+	@Override
+	public void deleteUom(Integer id) {
+		ht.delete(new Uom(id));
+	}
 }

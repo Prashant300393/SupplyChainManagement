@@ -9,4 +9,6 @@ public interface IUomService {
 	Integer saveUom(Uom ob);
 	
 	List<Uom> getAllUoms();
+	
+	void deleteUom(Integer id);
 }

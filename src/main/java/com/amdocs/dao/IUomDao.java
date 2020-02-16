@@ -11,5 +11,6 @@ public interface IUomDao {
 	
 	// FETCHING DATA FROM DATABASE
 	List<Uom> getAllUoms();
-	
+
+	void deleteUom(Integer id);
 }

@@ -22,6 +22,7 @@ public class UomServiceImpl implements IUomService{
 		return dao.saveUom(ob);
 	}
 
+	@Transactional(readOnly = true)
 	public List<Uom> getAllUoms() {
 		List<Uom> list = dao.getAllUoms();
 //		Collections.sort(list, (o1,o2) -> o1.getUomId()-o2.getUomId());
@@ -31,5 +32,10 @@ public class UomServiceImpl implements IUomService{
 					  .sorted( (o1, o2) -> o1.getUomId()-o2.getUomId()  )
 					  .collect(Collectors.toList());
 		return list;
+	}
+	
+	@Transactional
+	public void deleteUom(Integer id) {
+		dao.deleteUom(id);
 	}
 }

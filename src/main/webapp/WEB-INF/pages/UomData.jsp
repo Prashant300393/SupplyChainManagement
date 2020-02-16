@@ -15,6 +15,7 @@
 	<th>TYPE</th>
 	<th>MODEL</th>
 	<th>NOTE</th>
+	<th>DELETE</th>
 </tr>
 <c:forEach items="${list }" var="ob">
 <tr>
@@ -22,6 +23,7 @@
 	<td>${ob.uomType }</td>
 	<td>${ob.uomModel }</td>
 	<td>${ob.uomDesc }</td>
+	<td><a href="delete?uid=${ob.uomId }">DELETE</a></td>
 </tr>
 </c:forEach>
 </table>
@@ -30,5 +32,6 @@
 <h2>NO DATA FOUND</h2>
 </c:otherwise>
 </c:choose>
+${msg }
 </body>
 </html>

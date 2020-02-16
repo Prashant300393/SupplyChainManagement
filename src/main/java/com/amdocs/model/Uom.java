@@ -23,6 +23,12 @@ public class Uom{
 	public Uom() {
 		super();
 	}
+	// 1- arg - Constructor	
+	public Uom(Integer uomId) {
+		super();
+		this.uomId = uomId;
+	}
+	
 	public Integer getUomId() {
 		return uomId;
 	}

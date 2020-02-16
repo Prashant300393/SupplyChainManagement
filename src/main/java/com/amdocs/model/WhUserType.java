@@ -1,21 +1,26 @@
 package com.amdocs.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "whusertab")
+@RequiredArgsConstructor
+@NoArgsConstructor
 public class WhUserType {
 	
 	@Id
 	@GeneratedValue
-	private String userId;
+	@NonNull
+	private Integer userId;
 	private String userType;
 	private String userCode;
 	private String userFor;
