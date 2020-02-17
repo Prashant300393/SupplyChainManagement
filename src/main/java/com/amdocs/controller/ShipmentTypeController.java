@@ -29,7 +29,7 @@ public class ShipmentTypeController {
 	@RequestMapping("/register")	// GET
 	public String showRegPage(Model model)
 	{
-//		model.addAttribute("shipmentType"	, new ShipmentType()	);
+		model.addAttribute("shipmentType"	, new ShipmentType()	);
 		return "ShipmentTypeRegister";
 	}
 	
