@@ -27,8 +27,9 @@ public class ShipmentTypeController {
 	 */
 	
 	@RequestMapping("/register")	// GET
-	public String showRegPage()
+	public String showRegPage(Model model)
 	{
+//		model.addAttribute("shipmentType"	, new ShipmentType()	);
 		return "ShipmentTypeRegister";
 	}
 	
@@ -49,6 +50,9 @@ public class ShipmentTypeController {
 		Integer id = service.saveShipmentType(shipmentType);
 		String message = "Shipment Type ' "+id+ " '  Saved";
 		model.addAttribute("msg", message);
+		
+		model.addAttribute("shipmentType"	, new ShipmentType()	);	// clean the Data from the UI Form, otherwise it will be displayed on UI FORM
+		
 		return "ShipmentTypeRegister";
 	}
 	
@@ -82,6 +86,8 @@ public class ShipmentTypeController {
 			)
 	{
 		service.deleteShipmentType(id);
+		List<ShipmentType> list = service.getAllShipmentTypes();
+		model.addAttribute("list", list);
 		String msg = "Shipment  ' "+id+" '    Deleted";
 		model.addAttribute("msg", msg);
 		return "ShipmentTypeData";

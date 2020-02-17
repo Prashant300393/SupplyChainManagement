@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,41 +55,38 @@ input[type=submit]:hover {
 </head>
 
 <body> 
+<form:form action="save" method="post" modelAttribute="shipmentType">
 <span class="blinking"; style="font-weight: bold; text-align:center;  font-size: 25px; padding: 20%; margin: 7%">
 ---WELCOME TO SHIPMENT TYPE REGISTER PAGE---
 </span><br><br>
 <div class="container">
-<form action="save" method="post">
+<form:label path="shipMode">Shipment Mode</form:label>
+<form:select path="shipMode">
+	<form:option value="">--SELECT--</form:option>
+	<form:option value="Air">Air</form:option>
+	<form:option value="Truck">Truck</form:option>
+	<form:option value="Ship">Ship</form:option>
+	<form:option value="Train">Train</form:option>
+</form:select><br>
 
- <label>Shipment Mode</label>
-<select name="shipMode" required="required">
-	<option>---select---</option>
-	<option>Air</option>
-	<option>Truck</option>
-	<option>Ship</option>
-	<option>Train</option>
-</select>
+<form:label path="shipCode">Shipment Code</form:label>
+<form:input path="shipCode"/><br>
+<form:label path="enbShip">Enable Shipment</form:label>
+	<form:select path="enbShip">
+		<form:option value="">--SELECT--</form:option>
+		<form:option value="YES" >YES</form:option>
+		<form:option value="NO" >NO</form:option>
+	</form:select><br>
 
-<label>Shipment Code</label>
-<input type="text" name="shipCode" required="required">
-
-<label>Enable Shipment</label>
-<select name="enbShip" required="required">
-	<option>---select---</option>
-	<option>YES</option>
-	<option>NO</option>
-</select>
-
-<label>Shipment Grade</label><br>
-	<input type="radio" name="shipGrade" value="A" >A<br>
-	<input type="radio" name="shipGrade" value="B">B<br>
-	<input type="radio" name="shipGrade" value="C">C<br>
-<br>	
-<label>Description</label>
-    <textarea name="subject" placeholder="Write something.." style="height:200px"></textarea>
-    
-    <input type="submit" value="Create Shipment">
-</form>
+<form:label path="shipGrade">Shipment Grade</form:label><br>
+	<form:radiobutton path="shipGrade" value="A"/>A<br>
+	<form:radiobutton path="shipGrade" value="B"/>B<br>
+	<form:radiobutton path="shipGrade" value="C"/>C<br>
+	<br>	
+<form:label path="shipDesc">Description</form:label>
+<form:textarea path="shipDesc"/>
+      <input type="submit" value="Create Shipment">
+</form:form>
 </div>
 ${msg}
 </body>
