@@ -12,4 +12,8 @@ public interface IShipmentTypeDao {
 	public List<ShipmentType> getAllShipmentTypes();
 	
 	public void deleteShipmentType(Integer id);
+	
+	ShipmentType getOneShipmentType(Integer id);
+	
+	void updatShipmentType(ShipmentType ob);
 }

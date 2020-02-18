@@ -12,4 +12,8 @@ public interface IShipmentTypeService {
 	public List<ShipmentType> getAllShipmentTypes();
 
 	public void deleteShipmentType(Integer id);
+	
+	public ShipmentType getOneShipmentType(Integer id); 
+	
+	public void updatShipmentType(ShipmentType ob);
 }

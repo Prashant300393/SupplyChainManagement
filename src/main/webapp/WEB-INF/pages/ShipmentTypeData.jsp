@@ -19,7 +19,7 @@
 		<th>ENABLE</th>	
 		<th>GRADE</th>	
 		<th>NOTE</th>	
-		<th>OPERATION</th>
+		<th colspan="2">OPERATION</th>
 	</tr>
 
 	<!-- for(ShipmentType ob : list) { ...  } -->
@@ -32,6 +32,7 @@
 			<td>${ob.shipGrade }</td>
 			<td>${ob.shipDesc }</td>
 			<td><a href="delete?sid=${ob.shipId }">DELETE</a>
+			<td><a href="edit?sid=${ob.shipId}">EDIT</a>
 		</tr>
 	</c:forEach>
 </table>
