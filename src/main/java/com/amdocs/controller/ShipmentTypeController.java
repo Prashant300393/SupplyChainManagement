@@ -135,8 +135,22 @@ public class ShipmentTypeController {
 		return "ShipmentTypeData";
 	}
 
-
-
+	/**
+	 *  On click VIEW Hyperlink , One Row Data Displayed on "ShipmentTypeView.jsp"
+	 *  URL : /view : GET , METHOD : showOneShipment()
+	 *  Read key using @RequestParam and send Data using Model
+	 */
+	
+	@RequestMapping("/view")	// GET
+	public String showOneShipment( 
+			@RequestParam("sid")Integer id,
+			Model model		
+			)
+	{
+		ShipmentType st = service.getOneShipmentType(id);
+		model.addAttribute("ob", st);
+		return "ShipmentTypeView";
+	}
 
 
 
