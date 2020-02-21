@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.amdocs.model.ShipmentType;
-import com.amdocs.service.IShipmentTypeService;;
+import com.amdocs.service.IShipmentTypeService;
+import com.amdocs.view.ShipmentTypeExcelView;;
 
 @Controller
 @RequestMapping("/shipment")
@@ -57,11 +59,11 @@ public class ShipmentTypeController {
 		return "ShipmentTypeRegister";
 	}
 
-	/**
-	 * 1. Fetch the DATA from DATABASE and DISPLAY on UI in HTML TABLE FORMAT
-	 * 	2. Showing DATA from CONTROLLER TO UI :: MODEL (interface, memory provided by CONTAINER)
+	/**	 3.
+	 * 		a) Fetch the DATA from DATABASE and DISPLAY on UI in HTML TABLE FORMAT
+	 * 		b) Showing DATA from CONTROLLER TO UI :: MODEL (interface, memory provided by CONTAINER)
 	 * 
-	 * 3. URL : "/all"  ,  TYPE : GET  , PAGE : "ShipmentTypeData.jsp"
+	 *		c) URL : "/all"  ,  TYPE : GET  , PAGE : "ShipmentTypeData.jsp"
 	 */
 
 	@RequestMapping("/all")	// GET
@@ -73,11 +75,11 @@ public class ShipmentTypeController {
 	}
 
 	/**
-	 *   Deleting or editing one Row using URL Rewriting (Static path & Dynamic Path)
-	 *   ===>REQUEST : delete?sid=10
+	 *  4.  Deleting or editing one Row using URL Rewriting (Static path & Dynamic Path)
+	 * 		  ===>REQUEST : delete?sid=10
 	 *  
-	 *   read the Key using @RequestParam and display on UI using  Model
-	 *   URL : /delete , TYPE : GET , method = deleteShipment()
+	 *   	read the Key using @RequestParam and display on UI using  Model
+	 *   	URL : /delete , TYPE : GET , method = deleteShipment()
 	 */
 
 	@RequestMapping("/delete")
@@ -95,10 +97,10 @@ public class ShipmentTypeController {
 	}	
 
 	/**
-	 * Creating EDIT hyperlink in "ShipmentTypeData.jsp"
-	 * URL : "/edit , GET	, Method : showEditPage()
-	 * Read the ID using @RequestParam
-	 * Return to "ShipmentTypeEdit" Page
+	 * 5.  Creating EDIT hyperlink in "ShipmentTypeData.jsp"
+	 * 		URL : "/edit , GET	, Method : showEditPage()
+	 * 		Read the ID using @RequestParam
+	 * 		Return to "ShipmentTypeEdit" Page
 	 */
 
 	@RequestMapping("/edit")
@@ -113,9 +115,9 @@ public class ShipmentTypeController {
 	}
 
 	/**
-	 *  On click UPDATE , Data Read using @ModelAttribute
-	 *  URL : /update "POST"	, METHOD : updateShipmentType()
-	 *  Return "ShipmentTypeData.jsp"	Success Msg
+	 *  6. On click UPDATE , Data Read using @ModelAttribute
+	 *  	URL : /update "POST"	, METHOD : updateShipmentType()
+	 *  	Return "ShipmentTypeData.jsp"	Success Msg
 	 */
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -136,9 +138,9 @@ public class ShipmentTypeController {
 	}
 
 	/**
-	 *  On click VIEW Hyperlink , One Row Data Displayed on "ShipmentTypeView.jsp"
-	 *  URL : /view : GET , METHOD : showOneShipment()
-	 *  Read key using @RequestParam and send Data using Model
+	 * 7.  On click VIEW Hyperlink , One Row Data Displayed on "ShipmentTypeView.jsp"
+	 *  	URL : /view : GET , METHOD : showOneShipment()
+	 *  	Read key using @RequestParam and send Data using Model
 	 */
 	
 	@RequestMapping("/view")	// GET
@@ -152,8 +154,21 @@ public class ShipmentTypeController {
 		return "ShipmentTypeView";
 	}
 
-
-
-
+	/**
+	 *  8. ON Click ''Excel Export''  HYPERLINK, URL : /excel  : GET , showExcel()
+	 */
+	
+	@RequestMapping("/excel")
+	public ModelAndView showExcel() {
+		
+		ModelAndView m = new ModelAndView();
+		// setting the EXCELVIEW OBJECT
+		m.setView(new ShipmentTypeExcelView());
+		// Fetching data from DB
+		List<ShipmentType> list = service.getAllShipmentTypes();
+		// Adding the List<T> obj in MODEL with the Mapping key in EXCEL VIEW
+		m.addObject("list", list);
+		return m;
+	}
 
 }
