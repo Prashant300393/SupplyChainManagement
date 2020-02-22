@@ -5,24 +5,22 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
 </head>
 <body>
-<h2>---WELCOME TO UOM REGISTER PAGE---</h2>
-<form:form action="save" method="post" modelAttribute="uom">
+<h2>WELCOME TO UOM EDIT PAGE</h2><br>
+<form:form action="update" method="post" modelAttribute="uom">
 <pre>
-Uom Type:  <form:select path="uomType">
-					<form:option value="">---select---</form:option>
+Uom ID: <form:input path="uomId" readonly="true"/>
+Uom Type: <form:select path="uomType">
+					<form:option value="">--select--</form:option>
 					<form:option value="PACKING">PACKING</form:option>
 					<form:option value="NO PACKING">NO PACKING</form:option>
 					<form:option value="-NA-">-NA-</form:option>
 </form:select><br>
-Uom Model: <form:input path="uomModel" required="true"/>
-Description: 
-	   <form:textarea path="uomDesc"/><br>
-		<input type="submit" value="Create Uom">
+Uom Model: <form:input path="uomModel"/><br>
+Descripiton: <form:textarea path="uomDesc"/><br>
+	<input type="submit" value="Update">
 </pre>
 </form:form>
-${msg }
 </body>
 </html>

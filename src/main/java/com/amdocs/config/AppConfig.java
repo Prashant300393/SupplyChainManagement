@@ -18,6 +18,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.amdocs.model.ShipmentType;
+import com.amdocs.model.Uom;
+
 @Configuration
 @EnableTransactionManagement // enables HibTx (@Transactional)
 @EnableWebMvc	// Spring Mvc Activated
@@ -65,6 +68,7 @@ public class AppConfig {
 		LocalSessionFactoryBean sf = new LocalSessionFactoryBean();
 		sf.setDataSource(ds());
 		sf.setHibernateProperties(props());
+//		sf.setAnnotatedClasses(ShipmentType.class, Uom.class);
 		sf.setPackagesToScan("com.amdocs.model");
 		return sf;
 	}

@@ -13,4 +13,8 @@ public interface IUomDao {
 	List<Uom> getAllUoms();
 
 	void deleteUom(Integer id);
+	
+	Uom getOneUom(Integer id);
+	
+	void updateUom(Uom ob);
 }

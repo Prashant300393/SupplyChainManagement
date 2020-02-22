@@ -38,8 +38,15 @@ public class WhUserTypeServiceImpl implements IWhUserTypeService {
 		dao.deleteWhUserType(id);
 	}
 	
+	@Transactional(readOnly = true)
+	public WhUserType getOneWhUserType(Integer id) {
+		return dao.getOneWhUserType(id);
+	}
 	
-	
+	@Transactional
+	public void updateWhUserType(WhUserType ob) {
+		dao.updateWhUserType(ob);
+	}
 	
 	
 }

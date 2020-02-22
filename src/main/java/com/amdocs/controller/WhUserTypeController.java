@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.amdocs.model.WhUserType;
 import com.amdocs.service.IWhUserTypeService;
+import com.amdocs.view.WhUserTypeExcelView;
+
+import net.bytebuddy.description.field.FieldDescription.InGenericShape;
 
 @Controller
 @RequestMapping("/whuser")
@@ -26,8 +30,9 @@ public class WhUserTypeController {
 	 */
 
 	@RequestMapping("/register") // GET
-	public String showRegPage()
+	public String showRegPage(Model model)
 	{
+		model.addAttribute("whUserType", new WhUserType());
 		return "WhUserTypeRegister";
 	}
 
@@ -49,6 +54,7 @@ public class WhUserTypeController {
 		String msg = "WhUserType ' "+id+" ' Saved...!!!!! ";
 		//		String msg1 = "WhuserType"+id+"Saved";
 		model.addAttribute("msg", msg);		
+		model.addAttribute("whUserType", new WhUserType());
 		return "WhUserTypeRegister";
 	}
 
@@ -62,7 +68,7 @@ public class WhUserTypeController {
 		List<WhUserType> list = service.getAllWhUserTypes();
 		model.addAttribute("list", list);
 
-		return "WhUserData";
+		return "WhUserTypeData";
 	}
 
 	/**
@@ -84,7 +90,77 @@ public class WhUserTypeController {
 		model.addAttribute("msg", msg);
 		List<WhUserType> list = service.getAllWhUserTypes();
 		model.addAttribute("list", list);
-		return "WhUserData";
+		return "WhUserTypeData";
 	}
+	
+	/**
+	 * 	On Click HYPERLINK "/edit?wid="  Read the key and Display the "WhUserTypeEdit.jsp"
+	 *  URL : "/edit"	: GET , METHOD : showEditPage()
+	 */
+	@RequestMapping("/edit")	 // GET
+	public String showEditPage(
+			@RequestParam("wid") Integer id,
+			Model model
+			)
+	{
+		WhUserType wh = service.getOneWhUserType(id);
+		model.addAttribute("whUserType", wh);
+		return "WhUserTypeEdit";
+	}
+	
+	/**
+	 *  On Click "UPDATE" on "WhUserTypeEdit.jsp" Read the Form using @ModelAttribute
+	 *  and Display the "WhUserTypeData.jsp" with the Success Message of update using MODEL
+	 *  URL : "/update"	: POST , METHOD : updateWhUserType()
+	 */
+	
+	@RequestMapping("/update")
+	public String updateWhUserType(
+			@ModelAttribute WhUserType whUserType,
+			Model model
+			)
+	{
+		service.updateWhUserType(whUserType);
+		String msg = "WhUserType ' "+whUserType.getUserId()+" ' updated  ";
+		// sending Success msg to UI
+		model.addAttribute("msg", msg);
+		// fetching Updated Data and Displaying on UI
+		List<WhUserType> list = service.getAllWhUserTypes();
+		model.addAttribute("list", list);
+		return "WhUserTypeData";
+	}
+		
+	
+	@RequestMapping("/view")
+	public String viewOneWhUserType(
+			@RequestParam("wid")Integer id,
+			Model model
+			)
+	{
+		WhUserType wh = service.getOneWhUserType(id);
+		model.addAttribute("ob", wh);
+		return "WhUserTypeView";
+	}
+	
+	/**
+	 *  EXCEL EXPORT  using MODELANDVIEW which is a 
+	 *  HOLDER FOR for both MODEL(DATA) and VIEW(Page like pdf,excel)
+	 *  
+	 */
+	
+	@RequestMapping("/excel")
+	public ModelAndView showExcel()
+	{
+		ModelAndView m = new ModelAndView();
+		List<WhUserType> list = service.getAllWhUserTypes();
+		m.addObject("list", list);
+		m.setView(new WhUserTypeExcelView());
+		return m;
+	}
+	
+	
+	
+	
+	
 
 }

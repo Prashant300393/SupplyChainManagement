@@ -13,13 +13,11 @@ import lombok.RequiredArgsConstructor;
 @Data
 @Entity
 @Table(name = "whusertab")
-@RequiredArgsConstructor
 @NoArgsConstructor
 public class WhUserType {
 	
 	@Id
 	@GeneratedValue
-	@NonNull
 	private Integer userId;
 	private String userType;
 	private String userCode;

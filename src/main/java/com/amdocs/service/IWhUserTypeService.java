@@ -11,4 +11,8 @@ public interface IWhUserTypeService {
 	List<WhUserType> getAllWhUserTypes();
 	
 	void deleteWhUserType(Integer id);
+	
+	WhUserType getOneWhUserType(Integer id);
+
+	void updateWhUserType(WhUserType ob);
 }

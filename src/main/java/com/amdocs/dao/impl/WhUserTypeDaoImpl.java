@@ -30,7 +30,18 @@ public class WhUserTypeDaoImpl implements IWhUserTypeDao {
 	// DELETING RECORD FROM DATABASE
 	@Override
 	public void deleteWhUserType(Integer id) {
-		
-		ht.delete(new WhUserType(id));
+		WhUserType wh = new WhUserType();
+		wh.setUserId(id);
+		ht.delete(wh);
+	}
+	
+	@Override
+	public WhUserType getOneWhUserType(Integer id) {
+		return ht.get(WhUserType.class, id);
+	}
+
+	@Override
+	public void updateWhUserType(WhUserType ob) {
+		ht.update(ob);
 	}
 }

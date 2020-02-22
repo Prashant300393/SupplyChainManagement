@@ -10,6 +10,7 @@
 <body>
 	<c:choose>
 		<c:when test="${! empty list }">
+			<h3>WELCOME TO SHIPMENT TYPE DATA PAGE</h3>
 			<table border="1">
 				<tr>
 					<th>MODE</th>
@@ -34,7 +35,9 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<h3><a href="excel">Excel Export</a></h3>
+			<h3>
+				<a href="excel">Excel Export</a>
+			</h3>
 		</c:when>
 		<c:otherwise>
 			<h3>No DATA Found</h3>

@@ -38,4 +38,14 @@ public class UomServiceImpl implements IUomService{
 	public void deleteUom(Integer id) {
 		dao.deleteUom(id);
 	}
+	
+	@Transactional(readOnly = true)
+	public Uom getOneUom(Integer id) {
+		return dao.getOneUom(id);
+	}
+	
+	@Transactional
+	public void updateUom(Uom ob) {
+		dao.updateUom(ob);
+	}
 }

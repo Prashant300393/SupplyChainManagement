@@ -29,4 +29,15 @@ public class UomDaoImpl implements IUomDao{
 	public void deleteUom(Integer id) {
 		ht.delete(new Uom(id));
 	}
+	
+	@Override
+	public Uom getOneUom(Integer id) {
+		return ht.get(Uom.class, id);
+	}
+	
+	@Override
+	public void updateUom(Uom ob) {
+		ht.update(ob);
+	}
+	
 }
