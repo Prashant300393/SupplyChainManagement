@@ -137,7 +137,7 @@ public class UomController {
 	 */
 	
 	@RequestMapping("/view")
-	public String showOneUom(
+	public String viewOneUom(
 			@RequestParam("uid")Integer id,
 			Model model	)
 	{

@@ -144,7 +144,7 @@ public class ShipmentTypeController {
 	 */
 	
 	@RequestMapping("/view")	// GET
-	public String showOneShipment( 
+	public String viewOneShipment( 
 			@RequestParam("sid")Integer id,
 			Model model		
 			)
