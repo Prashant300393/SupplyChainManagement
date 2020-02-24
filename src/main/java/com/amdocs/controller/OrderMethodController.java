@@ -1,5 +1,6 @@
 package com.amdocs.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.amdocs.model.OrderMethod;
 import com.amdocs.service.IOrderMethodService;
 import com.amdocs.view.OrderMethodExcelView;
+import com.amdocs.view.OrderMethodPdfView;
 
 @Controller
 @RequestMapping("/order")
@@ -91,7 +93,7 @@ public class OrderMethodController {
 	 *  	Using "FormBackingObject"  and @RequestParam
 	 *  	URL : "/edit : GET , METHOD : showEditPage() 
 	 */
-	
+
 	@RequestMapping("/edit")  // GET
 	public String showEditPage(
 			@RequestParam("oid") Integer id,
@@ -100,10 +102,10 @@ public class OrderMethodController {
 	{
 		OrderMethod om = service.getOneOrderMethod(id);
 		model.addAttribute("orderMethod", om);
-			
+
 		return "OrderMethodEdit";
 	}
-	
+
 	/**
 	 *  6. On Click "UPDATE" on "OrderMethodEdit.jsp"	, Data will be Updated in DB
 	 *   	 Using @ModelAttribute and Display the NEW DATA ON "OrderMethodData.jsp	"
@@ -123,7 +125,7 @@ public class OrderMethodController {
 		model.addAttribute("list", list);
 		return "OrderMethodData";
 	}
-	
+
 	/**
 	 *  7.  On click "VIEW" HYPERLINK, Display One Row as HTML Table on UI
 	 */
@@ -136,7 +138,7 @@ public class OrderMethodController {
 	{
 		OrderMethod om = service.getOneOrderMethod(id);
 		model.addAttribute("om", om);
-			
+
 		return "OrderMethodView";
 	}
 
@@ -144,18 +146,46 @@ public class OrderMethodController {
 	 * 	8. On Click "EXCEL EXPORT" , Data should be Converted to ExcelFile and Download
 	 * 		Use "ModelAndView"	class which Holds both Model(DATA) and View(Page) as a Single Unit
 	 */
-	
+
 	@RequestMapping("/excel")
-	public ModelAndView showExcel()
+	public ModelAndView showExcel(
+			@RequestParam(value = "id", required = false)Integer id
+			)
 	{
 		ModelAndView m = new ModelAndView();
-		List<OrderMethod> list = service.getAllOrderMethods();
-		m.addObject("list", list);
 		m.setView(new OrderMethodExcelView());
+
+		if(id==null)
+		{
+			List<OrderMethod> list = service.getAllOrderMethods();
+			m.addObject("list", list);
+		}
+		else
+		{
+			OrderMethod om = service.getOneOrderMethod(id);
+			m.addObject("list", Arrays.asList(om));
+		}
 		return m;
 	}
-	
-	
-	
-	
+
+	@RequestMapping("/pdf")
+	public ModelAndView showPdf(
+			@RequestParam(value = "id", required = false)Integer id
+			)
+	{
+		ModelAndView m= new ModelAndView();
+		m.setView(new OrderMethodPdfView());
+		if(id==null)
+		{
+			List<OrderMethod> list = service.getAllOrderMethods();
+			m.addObject("list", list);
+		}
+		else
+		{
+			OrderMethod om = service.getOneOrderMethod(id);
+			m.addObject("list", Arrays.asList(om));
+		}
+		return m;
+	}
+
 }

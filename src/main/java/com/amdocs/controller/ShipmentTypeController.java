@@ -2,6 +2,7 @@ package com.amdocs.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.amdocs.model.ShipmentType;
 import com.amdocs.service.IShipmentTypeService;
-import com.amdocs.view.ShipmentTypeExcelView;;
+import com.amdocs.view.ShipmentTypeExcelView;
+import com.amdocs.view.ShipmentTypePdfView;;
 
 @Controller
 @RequestMapping("/shipment")
@@ -119,7 +121,7 @@ public class ShipmentTypeController {
 	 *  	URL : /update "POST"	, METHOD : updateShipmentType()
 	 *  	Return "ShipmentTypeData.jsp"	Success Msg
 	 */
-	
+
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updateShipment(
 			@ModelAttribute ShipmentType shipmentType,
@@ -130,7 +132,7 @@ public class ShipmentTypeController {
 		// sending Success message to UI
 		String msg = "Shipment ' "+shipmentType.getShipId()+" '  Updated";
 		model.addAttribute("msg", msg);
-		
+
 		// FETCHING new DATA 
 		List<ShipmentType> list = service.getAllShipmentTypes();
 		model.addAttribute("list", list);
@@ -142,7 +144,7 @@ public class ShipmentTypeController {
 	 *  	URL : /view : GET , METHOD : showOneShipment()
 	 *  	Read key using @RequestParam and send Data using Model
 	 */
-	
+
 	@RequestMapping("/view")	// GET
 	public String viewOneShipment( 
 			@RequestParam("sid")Integer id,
@@ -157,18 +159,53 @@ public class ShipmentTypeController {
 	/**
 	 *  8. ON Click ''Excel Export''  HYPERLINK, URL : /excel  : GET , showExcel()
 	 */
-	
+
 	@RequestMapping("/excel")
-	public ModelAndView showExcel() {
-		
+	public ModelAndView showExcel(
+			@RequestParam(value = "id", required = false) Integer id // optional
+			) {
+
 		ModelAndView m = new ModelAndView();
-		// setting the EXCELVIEW OBJECT
+		// set the View , Model will show the View of the class we passed in it
 		m.setView(new ShipmentTypeExcelView());
-		// Fetching data from DB
-		List<ShipmentType> list = service.getAllShipmentTypes();
-		// Adding the List<T> obj in MODEL with the Mapping key in EXCEL VIEW
-		m.addObject("list", list);
+
+		if(id==null) // id == null Fetch All the DATA in Excel
+		{
+			List<ShipmentType> list = service.getAllShipmentTypes();
+			// Adding the List<T> obj in MODEL with the Mapping key in EXCEL VIEW
+			m.addObject("list", list);
+		}
+		else		// Fetch Only One Row in Excel
+		{
+			ShipmentType st = service.getOneShipmentType(id);
+			m.addObject("list", Arrays.asList(st)); // converting Object in List so that we can use that ExcelView logic for Both requirements
+		}
 		return m;
 	}
 
+	/**
+	 * PDF EXPORT 
+	 */
+	@RequestMapping("/pdf")
+	public ModelAndView showPdf(
+			@RequestParam(value = "id", required = false)Integer id
+			)
+	{
+		ModelAndView m = new ModelAndView();
+		// set the View, Model will show the View of the class we passed in it
+		m.setView(new ShipmentTypePdfView());
+		
+		if(id==null) // id == null Fetch All the DATA in PDF
+		{
+			// Fetch All Data and SEND DATA to Pdf File (PdfView class)
+			List<ShipmentType> list = service.getAllShipmentTypes();
+			m.addObject("list", list); // the key "list" shud be matched in PdfView class
+		}
+		else	// Fetch Only One Row in PDF
+		{
+			ShipmentType st = service.getOneShipmentType(id);
+			m.addObject("list", Arrays.asList(st)); // converting Object in List so that we can use that PDFView logic for Both requirements
+		}
+		return m;
+	}
 }

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table border="1" align="center">
+<table border="1">
 <tr>
 	<th>ID</th>
 	<td>${uom.uomId}</td>
@@ -25,5 +25,6 @@
 	<td>${uom.uomDesc }</td>
 </tr>
 </table>
+<a href="excel?id=${uom.uomId }">EXCEL Export</a> | <a href="pdf?id=${uom.uomId }">PDF Export</a>
 </body>
 </html>

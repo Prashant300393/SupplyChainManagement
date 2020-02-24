@@ -36,7 +36,7 @@
 				</c:forEach>
 			</table>
 			<h3>
-				<a href="excel">Excel Export</a>
+				<a href="excel">Excel Export</a> | <a href="pdf">Pdf Export</a>
 			</h3>
 		</c:when>
 		<c:otherwise>

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table border="1" align="center">
+<table border="1">
 <tr>
 	<th>ID</th><td>${ob.shipId }</td>
 </tr>
@@ -27,5 +27,7 @@
 		<th>NOTE</th><td>${ob.shipDesc}</td>
 	</tr>
 </table>
+<a href="excel?id=${ob.shipId }">Excel Export</a>
+<a href="pdf?id=${ob.shipId }">Pdf Export</a>
 </body>
 </html>

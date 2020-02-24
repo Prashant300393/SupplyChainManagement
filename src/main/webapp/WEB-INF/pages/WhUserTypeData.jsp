@@ -9,7 +9,7 @@
 <body>
 <c:choose>
 <c:when test="${!empty list }">
-<table border="1" align="center">
+<table border="1">
 <tr>
 	<th>User id</th>
 	<th>USER_TYPE</th>
@@ -46,7 +46,7 @@
 </tr>
 </c:forEach>
 </table>
-<a href="excel">EXCEL EXPORT</a>
+<a href="excel">EXCEL Export</a> | <a href="pdf">PDF Export</a>
 </c:when>
 <c:otherwise>
 <h2>NO DATA FOUND</h2>

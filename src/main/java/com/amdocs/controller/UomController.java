@@ -1,5 +1,6 @@
 package com.amdocs.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.amdocs.model.Uom;
 import com.amdocs.service.IUomService;
 import com.amdocs.view.UomExcelView;
+import com.amdocs.view.UomPdfView;
 
 @Controller
 @RequestMapping("/uom")
@@ -61,7 +63,7 @@ public class UomController {
 	 * 
 	 * 		URL : "/all"	, 	TYPE : GET , 	METHOD : getAllUoms() , PAGE : 	UomData.jsp
 	 */
-	
+
 	@RequestMapping("/all")	// GET
 	public String getAllUoms(Model model)
 	{
@@ -69,7 +71,7 @@ public class UomController {
 		model.addAttribute("list", list);
 		return "UomData";
 	}
-	
+
 	/**
 	 * 4.  Deleting or Editing 1 Row using URL Rewriting (Static path & Dynamic Path)
 	 *      ===>REQUEST : delete?uid=1
@@ -91,7 +93,7 @@ public class UomController {
 		model.addAttribute("list", list);
 		return "UomData";
 	}
-	
+
 	/**
 	 * 	ON click HYPERLINK "EDIT" in UomData.jsp it will goto
 	 * URL : "/edit?uid=_" : GET , METHOD : showEditPage()  PAGE : UomEdit.jsp
@@ -108,13 +110,13 @@ public class UomController {
 		model.addAttribute("uom", uom);
 		return "UomEdit";
 	}
-	
+
 	/**
 	 * On Click "UPDATE"	 in "UomEdit.jsp"  
 	 * URL : "/update" : POST , METHOD : updateUom() ,  PAGE: "UomData.jsp"
 	 * using @ModelAttribute and Model
 	 */
-	
+
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updateUom(
 			@ModelAttribute Uom uom,
@@ -128,14 +130,14 @@ public class UomController {
 		List<Uom> list = service.getAllUoms();
 		model.addAttribute("list", list);
 		return "UomData";
-//		return "redirect:all";
+		//		return "redirect:all";
 	}
 	/**
 	 * On Click "VIEW" HYPERLINK get Data based on PK and
 	 * send to UI PAGE "UomView.jsp"  HTML TABLE FORMAT
 	 * using MODEL , URL : "/view"	: GET 
 	 */
-	
+
 	@RequestMapping("/view")
 	public String viewOneUom(
 			@RequestParam("uid")Integer id,
@@ -145,17 +147,55 @@ public class UomController {
 		model.addAttribute("uom", uom);
 		return "UomView";
 	}
-	
+	/**
+	 * EXCEL EXPORT
+	 */
+
 	@RequestMapping("/excel")
-	public ModelAndView showExcel()
+	public ModelAndView showExcel(
+			@RequestParam(value = "id", required = false)Integer id // optional
+			)
 	{
 		ModelAndView m = new ModelAndView();
 		// Setting the EXCEL VIEW OBJECT
 		m.setView(new UomExcelView());
 
-		List<Uom> list = service.getAllUoms();
-		// Adding the List<T> obj in MODEL with the Mapping key in EXCEL VIEW
-		m.addObject("list", list);
+		if(id==null)	// id is null then Add all the Data 
+		{				
+			List<Uom> list = service.getAllUoms();
+			// Adding the List<T> obj in MODEL with the Mapping key in EXCEL VIEW
+			m.addObject("list", list);
+		}
+		else  // id is not null then Add only One Row Data
+		{
+			Uom uom = service.getOneUom(id);
+			m.addObject("list", Arrays.asList(uom));	// converting Object in List so that we can use that ExcelView logic for Both requirements
+		}
+		return m;
+	}
+	
+	/**
+	 *   PDF EXPORT
+	 */
+
+	@RequestMapping("/pdf")
+	public ModelAndView showPdf(
+			@RequestParam(value = "id", required = false)Integer id
+			)
+	{
+		ModelAndView m = new ModelAndView();
+		m.setView(new UomPdfView());
+
+		if(id==null) // id is null then Add all the Data 
+		{
+			List<Uom> list = service.getAllUoms();
+			m.addObject("list", list);
+		}
+		else // id is not null then Add only One Row Data
+		{
+			Uom uom = service.getOneUom(id);
+			m.addObject("list", Arrays.asList(uom)); // converting Object in List so that we can use that PDFView logic for Both requirements
+		}
 		return m;
 	}
 	

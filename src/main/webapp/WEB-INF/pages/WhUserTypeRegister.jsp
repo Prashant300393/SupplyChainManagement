@@ -30,12 +30,12 @@
     	}	
 </script> -->
 </head>
-<body align="center">
+<body>
 <h3>WELCOME TO WH USER TYPE REGISTER PAGE	</h3><br>
 <form:form action="save" method="post" modelAttribute="whUserType">
 <pre>
 User Type:  <form:radiobutton path="userType" value="Vendor" onClick="setText('Vendor');" />Vendor
-	      <form:radiobutton path="userType" value="Customer" onClick="setText('Customer);"/>Customer<br>
+	    <form:radiobutton path="userType" value="Customer" onClick="setText('Customer);"/>Customer<br>
 User Code: <form:input path="userCode"/><br>
 User For : <form:input path="userFor"/><br>
 User Email : <form:input path="userMail" required="true"/><br>

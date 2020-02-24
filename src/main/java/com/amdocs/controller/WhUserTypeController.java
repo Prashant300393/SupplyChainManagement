@@ -1,5 +1,6 @@
 package com.amdocs.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.amdocs.model.WhUserType;
 import com.amdocs.service.IWhUserTypeService;
 import com.amdocs.view.WhUserTypeExcelView;
-
-import net.bytebuddy.description.field.FieldDescription.InGenericShape;
+import com.amdocs.view.WhUserTypePdfView;
 
 @Controller
 @RequestMapping("/whuser")
@@ -92,7 +92,7 @@ public class WhUserTypeController {
 		model.addAttribute("list", list);
 		return "WhUserTypeData";
 	}
-	
+
 	/**
 	 * 	On Click HYPERLINK "/edit?wid="  Read the key and Display the "WhUserTypeEdit.jsp"
 	 *  URL : "/edit"	: GET , METHOD : showEditPage()
@@ -107,13 +107,13 @@ public class WhUserTypeController {
 		model.addAttribute("whUserType", wh);
 		return "WhUserTypeEdit";
 	}
-	
+
 	/**
 	 *  On Click "UPDATE" on "WhUserTypeEdit.jsp" Read the Form using @ModelAttribute
 	 *  and Display the "WhUserTypeData.jsp" with the Success Message of update using MODEL
 	 *  URL : "/update"	: POST , METHOD : updateWhUserType()
 	 */
-	
+
 	@RequestMapping("/update")
 	public String updateWhUserType(
 			@ModelAttribute WhUserType whUserType,
@@ -129,8 +129,8 @@ public class WhUserTypeController {
 		model.addAttribute("list", list);
 		return "WhUserTypeData";
 	}
-		
-	
+
+
 	@RequestMapping("/view")
 	public String viewOneWhUserType(
 			@RequestParam("wid")Integer id,
@@ -141,26 +141,56 @@ public class WhUserTypeController {
 		model.addAttribute("ob", wh);
 		return "WhUserTypeView";
 	}
-	
+
 	/**
 	 *  EXCEL EXPORT  using MODELANDVIEW which is a 
 	 *  HOLDER FOR for both MODEL(DATA) and VIEW(Page like pdf,excel)
 	 *  
 	 */
-	
+
 	@RequestMapping("/excel")
-	public ModelAndView showExcel()
+	public ModelAndView showExcel(
+			@RequestParam(value = "id", required = false)Integer id
+			)
 	{
 		ModelAndView m = new ModelAndView();
-		List<WhUserType> list = service.getAllWhUserTypes();
-		m.addObject("list", list);
 		m.setView(new WhUserTypeExcelView());
+		if(id==null)
+		{
+			List<WhUserType> list = service.getAllWhUserTypes();
+			m.addObject("list", list);
+		}
+		else
+		{
+			WhUserType wh = service.getOneWhUserType(id);
+			m.addObject("list", Arrays.asList(wh));
+		}
 		return m;
 	}
-	
-	
-	
-	
-	
+
+	/**
+	 * PDF EXPORT
+	 */
+	@RequestMapping("/pdf")
+	public ModelAndView showPdf(
+			@RequestParam(value = "id", required = false)Integer id
+			)
+	{
+		ModelAndView m= new ModelAndView();
+		m.setView(new WhUserTypePdfView());
+		if(id==null)
+		{
+			List<WhUserType>list = service.getAllWhUserTypes();
+			m.addObject("list", list);
+		}
+		else
+		{
+			WhUserType wh = service.getOneWhUserType(id);
+			m.addObject("list", Arrays.asList(wh));
+		}
+		return m;
+	}
+
+
 
 }

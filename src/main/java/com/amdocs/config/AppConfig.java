@@ -18,8 +18,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.amdocs.model.ShipmentType;
-import com.amdocs.model.Uom;
 
 @Configuration
 @EnableTransactionManagement // enables HibTx (@Transactional)

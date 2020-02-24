@@ -15,6 +15,7 @@ import com.amdocs.model.WhUserType;
 
 public class WhUserTypeExcelView extends AbstractXlsxView{
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void buildExcelDocument(
 			Map<String, Object> model, 

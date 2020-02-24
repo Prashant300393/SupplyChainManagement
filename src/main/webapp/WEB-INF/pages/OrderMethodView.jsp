@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table border="1" align="center">
+<table border="1">
 <tr>
 	<th>ID</th>
 	<td>${om.orderId}</td>
@@ -33,5 +33,6 @@
 	<td>${om.orderDesc}</td>
 </tr>
 </table>
+<a href="excel?id=${om.orderId}">EXCEL Export</a> | <a href="pdf?id=${om.orderId}">PDF Export</a>
 </body>
 </html>

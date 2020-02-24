@@ -30,7 +30,7 @@
 				</c:forEach>
 			</table>
 			<br>
-			<a href="excel">EXPORT EXCEL</a>
+			<a href="excel">EXCEL Export</a> | <a href="pdf">PDF Export</a>
 		</c:when>
 		<c:otherwise>
 			<h2>NO DATA FOUND</h2>

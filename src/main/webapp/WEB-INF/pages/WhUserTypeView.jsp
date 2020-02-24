@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table border="1" align="center">
+<table border="1">
 <tr>
 	<th>ID</th>
 	<td>${ob.userId}</td>
@@ -45,5 +45,6 @@
 	<td>${ob.idNumber}</td>
 </tr>
 </table>
+<a href="excel?id=${ob.userId}">EXCEL Export</a> | <a href="pdf?id=${ob.userId }">PDF Export</a>
 </body>
 </html>
