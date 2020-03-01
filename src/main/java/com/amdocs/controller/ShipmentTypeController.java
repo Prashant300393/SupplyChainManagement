@@ -5,6 +5,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.amdocs.model.ShipmentType;
 import com.amdocs.service.IShipmentTypeService;
+import com.amdocs.util.ShipmentTypeUtil;
 import com.amdocs.view.ShipmentTypeExcelView;
 import com.amdocs.view.ShipmentTypePdfView;;
 
@@ -26,6 +29,12 @@ public class ShipmentTypeController {
 	@Autowired
 	private IShipmentTypeService service;
 
+	@Autowired
+	private ServletContext context;
+	
+	@Autowired
+	private ShipmentTypeUtil util;
+	
 	/**
 	 * 1. This method is used to Display "ShipmentTypeRegister Page"
 	 * 		URL : "/register" , TYPE : GET
@@ -208,4 +217,18 @@ public class ShipmentTypeController {
 		}
 		return m;
 	}
+
+	/**
+	 *  Pie Chart and Bar chart
+	 * 
+	 */
+	@RequestMapping("/charts")
+	public String showCharts() {
+		List<Object[ ]> list = service.getShipmentModeCount();
+		String path = context.getRealPath("/");
+		util.generatePieChart(path, list);
+		util.generateBarChart(path, list);	
+		return "ShipmentTypeCharts";
+	}
+
 }

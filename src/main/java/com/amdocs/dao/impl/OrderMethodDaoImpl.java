@@ -39,5 +39,17 @@ public class OrderMethodDaoImpl implements IOrderMethodDao {
 	public void updateOrderMethod(OrderMethod ob) {
 		ht.update(ob);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> getOrderModeCount() {
+		String hql = " select orderMode, count(orderMode) from com.amdocs.model.OrderMethod group by orderMode ";
+		return (List<Object[]>) ht.find(hql);
+	}
+	
+	
+	
+	
+	
 	
 }

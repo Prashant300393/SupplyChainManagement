@@ -3,6 +3,8 @@ package com.amdocs.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.amdocs.model.OrderMethod;
 import com.amdocs.service.IOrderMethodService;
+import com.amdocs.util.OrderMethodUtil;
 import com.amdocs.view.OrderMethodExcelView;
 import com.amdocs.view.OrderMethodPdfView;
 
@@ -24,6 +27,12 @@ public class OrderMethodController {
 	@Autowired
 	private IOrderMethodService service;
 
+	@Autowired
+	private ServletContext context;
+	
+	@Autowired
+	private OrderMethodUtil util;
+		
 	/**
 	 * 	1. Show "OrderMethodRegister.jsp"	
 	 * 		URL : "/register" : GET , METHOD : showRegPage()
@@ -168,6 +177,9 @@ public class OrderMethodController {
 		return m;
 	}
 
+	/**
+	 * Pdf Export
+	 */
 	@RequestMapping("/pdf")
 	public ModelAndView showPdf(
 			@RequestParam(value = "id", required = false)Integer id
@@ -187,5 +199,24 @@ public class OrderMethodController {
 		}
 		return m;
 	}
+
+	/**
+	 * 	Pie Chart & Bar Chart
+	 */
+	@RequestMapping("/charts")
+	public String showChart() {
+		List<Object[ ]> list = service.getOrderModeCount();
+		String path = context.getRealPath("/");
+		util.generatePieChar(path, list);
+		util.generateBarChart(path, list);
+		return "OrderMethodCharts";
+	}
+
+
+
+
+
+
+
 
 }

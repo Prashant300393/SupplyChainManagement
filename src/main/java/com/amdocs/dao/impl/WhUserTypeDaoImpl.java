@@ -44,4 +44,13 @@ public class WhUserTypeDaoImpl implements IWhUserTypeDao {
 	public void updateWhUserType(WhUserType ob) {
 		ht.update(ob);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> getWhUserTypeCount() {
+		String hql = " select userType, count(userType) from com.amdocs.model.WhUserType group by userType ";
+		return (List<Object[ ]>) ht.find(hql);
+	}
+
+
 }

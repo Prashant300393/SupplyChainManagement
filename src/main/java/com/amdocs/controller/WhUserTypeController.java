@@ -3,6 +3,8 @@ package com.amdocs.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.amdocs.model.WhUserType;
 import com.amdocs.service.IWhUserTypeService;
+import com.amdocs.util.WhUserTypeUtil;
 import com.amdocs.view.WhUserTypeExcelView;
 import com.amdocs.view.WhUserTypePdfView;
 
@@ -24,6 +27,12 @@ public class WhUserTypeController {
 	@Autowired
 	private IWhUserTypeService service;
 
+	@Autowired
+	private WhUserTypeUtil util;
+	
+	@Autowired
+	private ServletContext context;
+	
 	/**
 	 * 1.  This method used to Display "WhUserRegister.jsp" 
 	 *      URL : /register , Type = GET , METHOD : showRegPage()
@@ -191,6 +200,28 @@ public class WhUserTypeController {
 		return m;
 	}
 
-
+	/**
+	 *     Pie chart & Bar chart
+	 */
+	
+	@RequestMapping("/charts")
+	public String showChart() {
+		
+		List<Object[ ]> list = service.getWhUserTypeCount();
+		String path = context.getRealPath("/");
+		util.generateBarChart(path, list);
+		util.generatePieChart(path, list);
+		
+		return "WhUserTypeCharts";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

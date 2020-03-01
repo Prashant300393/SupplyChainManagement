@@ -26,13 +26,19 @@
 						<td>${ob.orderType }</td>
 						<td>${ob.orderAccept }</td>
 						<td>${ob.orderDesc }</td>
-						<td><a href="delete?oid=${ob.orderId}">DELETE</a></td>
-						<td><a href="edit?oid=${ob.orderId }">EDIT</a></td>
-						<td><a href="view?oid=${ob.orderId }">VIEW</a></td>
+						<td><a href="delete?oid=${ob.orderId}"><img alt="DELETE"
+								src="../resources/images/del.png" width="25" height="23"></a></td>
+						<td><a href="edit?oid=${ob.orderId }"><img alt="EDIT"
+								src="../resources/images/edit.png" width="25" height="23"></a></td>
+						<td><a href="view?oid=${ob.orderId }"><img alt="VIEW"
+								src="../resources/images/view.png" width="25" height="23"></a></td>
 					</tr>
 				</c:forEach>
 			</table>
-			<a href="excel">EXCEL Export</a> | <a href="pdf">PDF Export</a>
+			<a href="excel"><img alt="Export-Excel"
+				src="../resources/images/export-excel.png" width="60" height="60"></a>
+			<a href="pdf"><img alt="Export-Pdf"
+				src="../resources/images/pdf.png" width="60" height="60"></a>
 		</c:when>
 		<c:otherwise>
 			<h3>NO DATA FOUND</h3>

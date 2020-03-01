@@ -23,14 +23,20 @@
 						<td>${ob.uomType }</td>
 						<td>${ob.uomModel }</td>
 						<td>${ob.uomDesc }</td>
-						<td><a href="delete?uid=${ob.uomId }">DELETE</a></td>
-						<td><a href="edit?uid=${ob.uomId}">EDIT</a></td>
-						<td><a href="view?uid=${ob.uomId}">VIEW</a></td>
+						<td><a href="delete?uid=${ob.uomId }"><img alt="DELETE"
+								src="../resources/images/del.png" width="25" height="23"></a></td>
+						<td><a href="edit?uid=${ob.uomId}"><img alt="EDIT"
+								src="../resources/images/edit.png" width="25" height="23"></a></td>
+						<td><a href="view?uid=${ob.uomId}"><img alt="VIEW"
+								src="../resources/images/view.png" width="25" height="23"></a></td>
 					</tr>
 				</c:forEach>
 			</table>
 			<br>
-			<a href="excel">EXCEL Export</a> | <a href="pdf">PDF Export</a>
+			<a href="excel"><img alt="Export-Excel"
+				src="../resources/images/export-excel.png" width="60" height="60"></a>
+			<a href="pdf"><img alt="Export-Pdf"
+				src="../resources/images/pdf.png" width="60" height="60"></a>
 		</c:when>
 		<c:otherwise>
 			<h2>NO DATA FOUND</h2>

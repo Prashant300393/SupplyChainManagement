@@ -3,6 +3,8 @@ package com.amdocs.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.amdocs.model.Uom;
 import com.amdocs.service.IUomService;
+import com.amdocs.util.UomUtil;
 import com.amdocs.view.UomExcelView;
 import com.amdocs.view.UomPdfView;
 
@@ -24,6 +27,12 @@ public class UomController {
 	@Autowired
 	private IUomService service;
 
+	@Autowired
+	private UomUtil util;
+	
+	@Autowired
+	private ServletContext context;
+	
 	/**
 	 * 1. This method is used to Display "UomRegister" Page
 	 * 		URL : /register , Type : GET
@@ -197,6 +206,19 @@ public class UomController {
 			m.addObject("list", Arrays.asList(uom)); // converting Object in List so that we can use that PDFView logic for Both requirements
 		}
 		return m;
+	}
+	
+	/**
+	 *  Pie chart & Bar chart
+	 */
+	@RequestMapping("/charts")
+	public String showChart() {
+		
+		List<Object[ ]> list = service.getUomTypeCount();
+		String path = context.getRealPath("/");
+		util.generatePieChart(path, list);
+		util.generateBarChart(path, list);
+		return "UomCharts";
 	}
 	
 }

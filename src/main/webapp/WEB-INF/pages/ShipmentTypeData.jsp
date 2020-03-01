@@ -29,14 +29,20 @@
 						<td>${ob.enbShip }</td>
 						<td>${ob.shipGrade }</td>
 						<td>${ob.shipDesc }</td>
-						<td><a href="delete?sid=${ob.shipId }">DELETE</a></td>
-						<td><a href="edit?sid=${ob.shipId}">EDIT</a></td>
-						<td><a href="view?sid=${ob.shipId}">VIEW</a></td>
+						<td><a href="delete?sid=${ob.shipId }"><img alt="DELETE"
+								src="../resources/images/del.png" width="25" height="23"></a></td>
+						<td><a href="edit?sid=${ob.shipId}"><img alt="EDIT"
+								src="../resources/images/edit.png" width="25" height="23"></a></td>
+						<td><a href="view?sid=${ob.shipId}"><img alt="VIEW"
+								src="../resources/images/view.png" width="25" height="23"></a></td>
 					</tr>
 				</c:forEach>
 			</table>
 			<h3>
-				<a href="excel">Excel Export</a> | <a href="pdf">Pdf Export</a>
+				<a href="excel"><img alt="Export-Excel"
+					src="../resources/images/export-excel.png" width="60" height="60"></a>
+				<a href="pdf"><img alt="Export-Pdf"
+					src="../resources/images/pdf.png" width="60" height="60"></a>
 			</h3>
 		</c:when>
 		<c:otherwise>

@@ -17,6 +17,8 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 
@@ -27,7 +29,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @PropertySource("classpath:application.properties")
 //	All Layered Classes Common Packages
 @ComponentScan("com.amdocs")
-public class AppConfig {
+public class AppConfig  implements WebMvcConfigurer{ // enabling the ResourceHandler implemnting WebMvcConfigure (interface)
 
 	@Autowired
 	private Environment env;
@@ -110,6 +112,16 @@ public class AppConfig {
 	public CommonsMultipartResolver multipartResolver()
 	{
 		return new CommonsMultipartResolver();
+	}
+
+	/**
+	 * Enabling the ResourceHandler implementing WebMvcConfigure
+	 * To Display images, css, js files on Browser
+	 */
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**")	// predefined word resources
+					 .addResourceLocations("/resources/"); // our path location
 	}
 	
 }

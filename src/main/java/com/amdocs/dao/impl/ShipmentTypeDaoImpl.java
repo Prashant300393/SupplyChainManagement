@@ -42,4 +42,12 @@ public class ShipmentTypeDaoImpl implements IShipmentTypeDao {
 	public void updatShipmentType(ShipmentType ob) {
 		ht.update(ob);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> getShipmentModeCount() {
+		String hql = " select shipMode, count(shipMode)  from com.amdocs.model.ShipmentType group by shipMode  ";
+		return (List<Object[ ]>) ht.find(hql);
+	}
+
 }
