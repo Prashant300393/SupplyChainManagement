@@ -86,8 +86,8 @@ input[type=submit]:hover {
 <form:label path="shipDesc">Description</form:label>
 <form:textarea path="shipDesc"/>
       <input type="submit" value="Create Shipment">
-</form:form>
 </div>
+</form:form>
 ${msg}
 </body>
 </html>

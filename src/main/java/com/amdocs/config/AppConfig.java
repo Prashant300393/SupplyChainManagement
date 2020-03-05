@@ -123,5 +123,4 @@ public class AppConfig  implements WebMvcConfigurer{ // enabling the ResourceHan
 		registry.addResourceHandler("/resources/**")	// predefined word resources
 					 .addResourceLocations("/resources/"); // our path location
 	}
-	
 }
