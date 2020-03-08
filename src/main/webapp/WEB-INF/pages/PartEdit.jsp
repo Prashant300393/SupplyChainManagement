@@ -47,6 +47,7 @@ input[type=reset]:hover {
   background-color: #45a049;
 }
 
+
 .container {
   border-radius: 5px;
   background-color: #d5f4e6;
@@ -69,12 +70,19 @@ input[type=reset]:hover {
 <body>
 	<%@include file="Menu.jsp"%>
 <span class="blinking"; style="font-weight: bold; text-align:center;  font-size: 25px; padding: 20%; margin: 7%">
----WELCOME TO PART REGISTER PAGE---
+---WELCOME TO PART EDIT PAGE---
 </span>
 	<br>
 	<br>
 	<div class="container" style="width: 47%">
-		<form:form action="save" method="post" modelAttribute="part">
+		<form:form action="update" method="post" modelAttribute="part">
+	<div class="row">
+				<div class="col-2">
+					<form:label path="partId">ID :</form:label>
+				</div>
+				<form:input path="partId" readonly="true" />
+			</div>
+
 			<div class="row">
 				<div class="col-2">
 					<form:label path="partCode">Code:</form:label>
@@ -121,9 +129,9 @@ input[type=reset]:hover {
 				<div class="col-2">
 					<form:label path="uomOb">Uom</form:label>
 				</div>
-				<form:select path="uomOb.uomId">
+				<form:select path="uomOb.uomId">  <%-- FOREIGN KEY PATH --%>
 					<form:option value="">--SELECT--</form:option>
-					<form:options items="${uomList}" itemValue="uomId"
+					<form:options items="${uomList}" itemValue="uomId"  
 						itemLabel="uomModel" />
 				</form:select>
 			</div>
@@ -137,7 +145,7 @@ input[type=reset]:hover {
 			<br>
 			<div class="row">
 				<div class="col-2"></div>
-					<input type="submit" value="Register">
+					<input type="submit" value="Update">
 				<div class="col-1"></div>
 					<input type="reset" value="Reset">
 			</div>

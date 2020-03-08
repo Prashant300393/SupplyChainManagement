@@ -33,11 +33,11 @@
 						<td>${ob.baseCurrency}</td>
 						<td>${ob.uomOb.uomModel}</td>
 						<td>${ob.pdesc}</td>
-						<td><a href="delete?oid=${ob.partId}"><img alt="DELETE"
+						<td><a href="delete?id=${ob.partId}"><img alt="DELETE"
 								src="../resources/images/del.png" width="25" height="23"></a></td>
-						<td><a href="edit?oid=${ob.partId }"><img alt="EDIT"
+						<td><a href="edit?id=${ob.partId }"><img alt="EDIT"
 								src="../resources/images/edit.png" width="25" height="23"></a></td>
-						<td><a href="view?oid=${ob.partId }"><img alt="VIEW"
+						<td><a href="view?id=${ob.partId }"><img alt="VIEW"
 								src="../resources/images/view.png" width="25" height="23"></a></td>
 					</tr>
 				</c:forEach>
@@ -51,5 +51,6 @@
 			<h3>NO DATA FOUND</h3>
 		</c:otherwise>
 	</c:choose>
+	${msg}
 </body>
 </html>
