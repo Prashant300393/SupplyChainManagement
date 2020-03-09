@@ -31,6 +31,10 @@ public class Part {
 	@ManyToOne
 	@JoinColumn(name = "uomIdFk")
 	private Uom uomOb; // Has-A
+
+	@ManyToOne
+	@JoinColumn(name = "omIdFk")
+	private OrderMethod orderMethodOb; // Has-A
 	
 	private String pdesc;
 
@@ -126,13 +130,19 @@ public class Part {
 		this.dimen = dimen;
 	}
 
+	public OrderMethod getOrderMethodOb() {
+		return orderMethodOb;
+	}
+
+	public void setOrderMethodOb(OrderMethod orderMethodOb) {
+		this.orderMethodOb = orderMethodOb;
+	}
+
 	@Override
 	public String toString() {
 		return "Part [partId=" + partId + ", partCode=" + partCode + ", partLen=" + partLen + ", partWid=" + partWid
 				+ ", partHgt=" + partHgt + ", baseCost=" + baseCost + ", baseCurrency=" + baseCurrency + ", uomOb="
-				+ uomOb + ", pdesc=" + pdesc + ", dimen=" + dimen + "]";
+				+ uomOb + ", orderMethodOb=" + orderMethodOb + ", pdesc=" + pdesc + ", dimen=" + dimen + "]";
 	}
 
-	
-	
 }

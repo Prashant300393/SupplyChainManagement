@@ -123,9 +123,19 @@ input[type=reset]:hover {
 				</div>
 				<form:select path="uomOb.uomId">
 					<form:option value="">--SELECT--</form:option>
-					<form:options items="${uomList}" itemValue="uomId"
-						itemLabel="uomModel" />
-				</form:select>
+<%-- 			<form:options items="${uomList}" itemValue="uomId" 	itemLabel="uomModel" /> --%>
+					<form:options items="${uomMap}" />
+					</form:select>
+			</div>
+			<br>
+				<div class="row">
+				<div class="col-2">
+					<form:label path="orderMethodOb">Order Mode</form:label>
+				</div>
+				<form:select path="orderMethodOb.orderId">
+					<form:option value="">--SELECT--</form:option>
+					<form:options items="${orderMap}" />
+					</form:select>
 			</div>
 			<br>
 			<div class="row">

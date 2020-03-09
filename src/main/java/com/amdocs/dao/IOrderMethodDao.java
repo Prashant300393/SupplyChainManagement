@@ -18,4 +18,6 @@ public interface IOrderMethodDao {
 
 	List<Object[ ]> getOrderModeCount();
 	
+	List<Object[ ]> getOrderMethodIdAndMode();
+	
 }

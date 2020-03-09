@@ -54,7 +54,10 @@ public class UomServiceImpl implements IUomService{
 		return dao.getUomTypeCount();
 	}
 
-
+	@Transactional(readOnly = true)
+	public List<Object[]> getUomIdAndModel() {
+		return dao.getUomIdAndModel();
+	}
 
 
 

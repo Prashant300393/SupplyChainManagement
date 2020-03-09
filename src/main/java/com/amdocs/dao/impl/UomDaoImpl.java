@@ -40,12 +40,19 @@ public class UomDaoImpl implements IUomDao{
 		ht.update(ob);
 	}
 
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<Object[]> getUomTypeCount() {
 		String hql = " select uomType, count(uomType) from com.amdocs.model.Uom group by uomType  ";
 		return (List<Object[]>) ht.find(hql);
 	}
 	
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@Override
+	public List<Object[]> getUomIdAndModel() {
+		String hql = " select uomId, uomModel from com.amdocs.model.Uom  ";
+		return (List<Object[ ]>) ht.find(hql);
+	}
 	
 	
 }

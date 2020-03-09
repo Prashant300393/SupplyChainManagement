@@ -18,4 +18,5 @@ public interface IOrderMethodService {
 	
 	List<Object[ ]> getOrderModeCount();
 	
+	List<Object[ ]> getOrderMethodIdAndMode();
 }

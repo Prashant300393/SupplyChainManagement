@@ -18,4 +18,6 @@ public interface IUomService {
 
 	List<Object[ ]> getUomTypeCount();
 
+	List<Object[ ]> getUomIdAndModel();
+	
 }

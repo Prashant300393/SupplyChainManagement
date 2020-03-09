@@ -20,7 +20,7 @@ public interface IUomDao {
 
 	List<Object[ ]> getUomTypeCount();
 
-
+	List<Object[ ]> getUomIdAndModel();
 
 
 }

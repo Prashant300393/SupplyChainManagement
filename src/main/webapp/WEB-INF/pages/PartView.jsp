@@ -42,6 +42,10 @@
 			<td>${ob.uomOb.uomModel}</td>
 		</tr>
 		<tr>
+			<th>ORDER MODE</th>
+			<td>${ob.orderMethodOb.orderMode}</td>
+		</tr>
+		<tr>
 			<th>NOTE</th>
 			<td>${ob.pdesc}</td>
 		</tr>

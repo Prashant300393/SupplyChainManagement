@@ -52,13 +52,13 @@ public class PartPdfView extends AbstractPdfView{
 
 		// creating Table with no of Columns
 		//specify column widths
-		float[ ] columnWidths = {1f, 2f, 1.5f,1.5f, 2f, 3.5f, 6f, 2f, 3f};
+		float[ ] columnWidths = {1f, 2f, 1.5f,1.5f, 2f, 3.5f, 6f, 2f, 4f, 3f};
 		//create PDF table with the given widths
 		PdfPTable table = new PdfPTable(columnWidths);
 		// set table width a percentage of the page width
-		table.setWidthPercentage(90f);
+		table.setWidthPercentage(95f);
 		
-		Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN, 12);
+		Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN, 10);
 		
 		   //insert column headings
 		   insertCell(table, "ID", Element.ALIGN_CENTER, 1, font);
@@ -69,6 +69,7 @@ public class PartPdfView extends AbstractPdfView{
 		   insertCell(table, "BASE COST", Element.ALIGN_LEFT, 1, font);
 		   insertCell(table, "BASE CURRENCY", Element.ALIGN_LEFT, 1, font);
 		   insertCell(table, "UOM", Element.ALIGN_CENTER, 1, font);
+		   insertCell(table, "ORDER MODE", Element.ALIGN_LEFT, 1, font);
 		   insertCell(table, "NOTE", Element.ALIGN_CENTER, 1, font);
 		   table.setHeaderRows(1);
 		
@@ -97,6 +98,7 @@ public class PartPdfView extends AbstractPdfView{
 			   insertCell(table, part.getBaseCost().toString(), Element.ALIGN_LEFT, 1, font);
 			   insertCell(table, part.getBaseCurrency(), Element.ALIGN_LEFT, 1, font);
 			   insertCell(table, part.getUomOb().getUomModel(), Element.ALIGN_CENTER, 1, font);
+			   insertCell(table, part.getOrderMethodOb().getOrderMode(), Element.ALIGN_LEFT, 1, font);
 			   insertCell(table, part.getPdesc(), Element.ALIGN_CENTER, 1, font);
 	
 //			t.addCell(part.getPartId().toString());
@@ -132,6 +134,4 @@ public class PartPdfView extends AbstractPdfView{
 		table.addCell(cell);
 
 	}
-
-
 }

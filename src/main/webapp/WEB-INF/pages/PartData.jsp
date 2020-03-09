@@ -19,6 +19,7 @@
 					<th>BASE COST</th>
 					<th>BASE CURRENCY</th>
 					<th>UOM</th>
+					<th>ORDER MODE</th>
 					<th>NOTE</th>
 					<th colspan="3">OPERATION</th>
 				</tr>
@@ -32,6 +33,7 @@
 						<td>${ob.baseCost}</td>
 						<td>${ob.baseCurrency}</td>
 						<td>${ob.uomOb.uomModel}</td>
+						<td>${ob.orderMethodOb.orderMode}</td>
 						<td>${ob.pdesc}</td>
 						<td><a href="delete?id=${ob.partId}"><img alt="DELETE"
 								src="../resources/images/del.png" width="25" height="23"></a></td>
