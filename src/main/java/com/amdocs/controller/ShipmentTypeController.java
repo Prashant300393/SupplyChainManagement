@@ -167,6 +167,11 @@ public class ShipmentTypeController {
 
 	/**
 	 *  8. ON Click ''Excel Export''  HYPERLINK, URL : /excel  : GET , showExcel()
+	 *  
+	 *  If ID is NULL then ExcelView LOGIC will be for ShipmentTypeData.jsp Excel Download
+	 *  Else ShipmentTypeView Excel Download
+	 *  
+	 *  One Logic used for Both Excels
 	 */
 
 	@RequestMapping("/excel")

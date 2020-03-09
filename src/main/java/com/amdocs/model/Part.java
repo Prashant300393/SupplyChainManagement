@@ -132,5 +132,7 @@ public class Part {
 				+ ", partHgt=" + partHgt + ", baseCost=" + baseCost + ", baseCurrency=" + baseCurrency + ", uomOb="
 				+ uomOb + ", pdesc=" + pdesc + ", dimen=" + dimen + "]";
 	}
+
+	
 	
 }

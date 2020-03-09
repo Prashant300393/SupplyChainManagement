@@ -158,6 +158,11 @@ public class UomController {
 	}
 	/**
 	 * EXCEL EXPORT
+	 * 
+	 *  If ID is NULL then ExcelView LOGIC will be for UomData.jsp Excel Download
+	 *  Else UomView Excel Download
+	 *  
+	 *  One Logic used for Both Excels
 	 */
 
 	@RequestMapping("/excel")
