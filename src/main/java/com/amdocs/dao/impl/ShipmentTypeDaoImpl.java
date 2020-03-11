@@ -50,4 +50,13 @@ public class ShipmentTypeDaoImpl implements IShipmentTypeDao {
 		return (List<Object[ ]>) ht.find(hql);
 	}
 
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@Override
+	public List<Object[]> getShipmentTypeIdAndCode() {
+		String hql = " select shipId, shipCode from " +ShipmentType.class.getName()+ " where enbShip='YES' ";
+		return (List<Object[]>) ht.find(hql);
+	}
+	
+	
+	
 }

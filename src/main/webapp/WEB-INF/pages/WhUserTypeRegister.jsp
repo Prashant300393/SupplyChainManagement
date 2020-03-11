@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     function EnableDisableTextBox(card) {
         var selectedValue = card.options[card.selectedIndex].value;
         var txtOther = document.getElementById("txtOther");
@@ -14,8 +14,8 @@
             txtOther.focus();
         }
     }
-
-    function setText(target) {
+    
+   function setText(target) {
     	var txt = document.getElementById(target);
     	var temp = txt.value;
     	var tf = document.getElementById("userFor");
@@ -28,19 +28,19 @@
 			tf.value = "Purchase";
 			}
     	}	
-</script> -->
+</script>
 </head>
 <body>
 <h3>WELCOME TO WH USER TYPE REGISTER PAGE	</h3><br>
 <form:form action="save" method="post" modelAttribute="whUserType">
 <pre>
-User Type:  <form:radiobutton path="userType" value="Vendor" onClick="setText('Vendor');" />Vendor
-	    <form:radiobutton path="userType" value="Customer" onClick="setText('Customer);"/>Customer<br>
+User Type:  <form:radiobutton id="radio1" path="userType" value="Vendor" onClick="setText('radio1');" />Vendor
+	    <form:radiobutton id="radio2" path="userType" value="Customer" onClick="setText('radio2');"/>Customer<br>
 User Code: <form:input path="userCode"/><br>
-User For : <form:input path="userFor"/><br>
+User For : <form:input id="textField" path="userFor" value="Choose One"/><br>
 User Email : <form:input path="userMail" required="true"/><br>
 User Contact: <form:input path="userContact" required="true"/><br>
-User ID Type: <form:select path="userIdType">
+User ID Type: <form:select  path="userIdType">
 						<form:option 	value="" >--select--</form:option>
 						<form:option value="PANCARD">PANCARD</form:option>
 						<form:option value="AADHAR CARD">AADHAR CARD</form:option>

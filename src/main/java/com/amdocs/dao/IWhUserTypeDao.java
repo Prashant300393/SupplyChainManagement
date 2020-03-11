@@ -16,6 +16,10 @@ public interface IWhUserTypeDao {
 
 	void updateWhUserType(WhUserType ob);
 
-	List<Object[ ]> getWhUserTypeCount();
+	List<Object[ ]> getWhUserTypeCount();	// charts
+	
+	List<Object[ ]> getWhUserTypeIdAndCode(String userType); // integration dropdown
 
+	
+	
 }

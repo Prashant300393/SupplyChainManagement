@@ -51,6 +51,12 @@ public class WhUserTypeDaoImpl implements IWhUserTypeDao {
 		String hql = " select userType, count(userType) from com.amdocs.model.WhUserType group by userType ";
 		return (List<Object[ ]>) ht.find(hql);
 	}
-
+	
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	@Override
+	public List<Object[]> getWhUserTypeIdAndCode(String userType) {
+		String hql = " select userId, userCode from "  +WhUserType.class.getName()+  " where userType=?0  ";
+		return (List<Object[ ]>)ht.find(hql, userType);
+	}
 
 }

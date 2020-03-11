@@ -18,5 +18,7 @@ public interface IWhUserTypeService {
 
 	List<Object[ ]> getWhUserTypeCount();
 
-
+	List<Object[ ]> getWhUserTypeIdAndCode(String userType);
+	
+	
 }
