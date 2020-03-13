@@ -8,9 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import com.amdocs.model.PurchaseOrder;
+import com.amdocs.model.ShipmentType;
 import com.amdocs.service.IPurchaseOrderService;
 import com.amdocs.service.IShipmentTypeService;
 import com.amdocs.service.IWhUserTypeService;
@@ -77,7 +80,39 @@ public class PurchaseOrderController {
 		return "PurchaseOrderRegister";
 	}
 
+	@RequestMapping("/all")
+	public String  getAllPurchaseOrders(Model model) {
+		
+		List<PurchaseOrder> list = service.getAllPurchaseOrders();
+		model.addAttribute("list", list);
+		return "PurchaseOrderData";
+	}
 	
+	@RequestMapping("/delete")
+	public String deletePurchaseOrder(
+			@RequestParam("id") Integer id,
+			Model model
+			)
+	{
+		service.deletePurchaseOrder(id);
+		String msg = "PurchaseOrder"+id+ "Deleted";
+		model.addAttribute("msg", msg);
+		List<PurchaseOrder> list = service.getAllPurchaseOrders();
+		model.addAttribute("list", list);
+		return "PurchaseOrderData";
+	}
+		
+	@RequestMapping("/view")	// GET
+	public String viewOnePurchaseOrder( 
+			@RequestParam("id")Integer id,
+			Model model		
+			)
+	{
+		PurchaseOrder po = service.getOnePurchaseOrder(id);
+		model.addAttribute("ob", po);
+		return "PurchaseOrderView";
+	}	
+
 	
 	
 }
