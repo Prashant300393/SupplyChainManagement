@@ -46,9 +46,8 @@ public class PartPdfView extends AbstractPdfView{
 		document.add(p);
 		document.add(Chunk.NEWLINE);
 
-		// read Data from model
+		// Read Data from model
 		List<Part> list = (List<Part>) model.get("list");
-
 
 		// creating Table with no of Columns
 		//specify column widths

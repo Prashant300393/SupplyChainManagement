@@ -45,4 +45,11 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 		return dao.getOnePurchaseOrder(id);
 	}
 	
+	@Transactional
+	public void updatePurchaseOrder(PurchaseOrder po) {
+		
+		dao.updatePurchaseOrder(po);
+	}
+	
+	
 }

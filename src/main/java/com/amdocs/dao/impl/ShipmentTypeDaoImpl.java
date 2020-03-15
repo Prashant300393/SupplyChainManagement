@@ -43,6 +43,8 @@ public class ShipmentTypeDaoImpl implements IShipmentTypeDao {
 		ht.update(ob);
 	}
 
+	
+	// Bar Charts
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Object[]> getShipmentModeCount() {
@@ -50,9 +52,10 @@ public class ShipmentTypeDaoImpl implements IShipmentTypeDao {
 		return (List<Object[ ]>) ht.find(hql);
 	}
 
+	// Integeration ShipmentType with Other Module
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
-	public List<Object[]> getShipmentTypeIdAndCode() {
+	public List<Object[ ]> getShipmentTypeIdAndCode() {
 		String hql = " select shipId, shipCode from " +ShipmentType.class.getName()+ " where enbShip='YES' ";
 		return (List<Object[]>) ht.find(hql);
 	}

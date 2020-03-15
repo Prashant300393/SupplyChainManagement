@@ -35,4 +35,9 @@ public class PurchaseOrderDaoImpl implements IPurchaseOrderDao {
 		return ht.get(PurchaseOrder.class, id);
 	}
 	
+	@Override
+	public void updatePurchaseOrder(PurchaseOrder po) {
+		ht.update(po);
+	}
+	
 }
