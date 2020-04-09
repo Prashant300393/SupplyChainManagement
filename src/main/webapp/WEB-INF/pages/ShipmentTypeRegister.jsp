@@ -5,7 +5,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
 <link href="../resources/css/ShipmentTypeRegister.css" rel="stylesheet"
 	type="text/css">
 </head>
@@ -17,9 +23,9 @@
 			<div class="row">
 				<div class="col-2">
 					<form:label path="shipMode">Shipment Mode</form:label>
-					</div>
-				<span id="shipModeError"></span>
 				</div>
+				<span id="shipModeError"></span>
+			</div>
 			<form:select path="shipMode">
 				<form:option value="">--SELECT--</form:option>
 				<form:option value="Air">Air</form:option>
@@ -28,7 +34,7 @@
 				<form:option value="Train">Train</form:option>
 			</form:select>
 			<br>
-			
+
 			<div class="row">
 				<div class="col-2">
 					<form:label path="shipCode">Shipment Code</form:label>
@@ -49,14 +55,13 @@
 				<form:option value="NO">NO</form:option>
 			</form:select>
 			<br>
-			
+
 			<div class="row">
 				<div class="col-2">
 					<form:label path="shipGrade">Shipment Grade</form:label>
 				</div>
 				<span id="shipGradeError"></span>
 			</div>
-			<br>
 			<form:radiobutton path="shipGrade" value="A" />
 			A<br>
 			<form:radiobutton path="shipGrade" value="B" />
@@ -65,13 +70,17 @@
 			C<br>
 			<br>
 			<div class="row">
-			<div class="col-2">
-				<form:label path="shipDesc">Description</form:label>
-			</div>
-			<span id="shipDescError"></span>
+				<div class="col-2">
+					<form:label path="shipDesc">Description</form:label>
+				</div>
+				<span id="shipDescError"></span>
 			</div>
 			<form:textarea path="shipDesc" />
-			<input id="register"   type="submit" value="Create Shipment">
+			<div class="row">
+				<div class="col-8"></div>
+				<input id="register" type="submit" value="Create Shipment">
+				<input type="reset" value="Reset">
+			</div>
 		</form:form>
 		${msg}
 	</div>
@@ -147,20 +156,18 @@
 					// SHIPGRADE  Error
 					function validate_shipGrade(){
 
-						var val = $("#shipGrade").val();
-
-						if (val==''){
+						var val = $('input[type="radio"][name="shipGrade"]:checked').length;
+						if(val==0){
 							$("#shipGradeError").show();
-							$("#shipGradeError").html("*Please select Shipment Grade");
+							$("#shipGradeError").html("<b>*Please select one Grade </b>");
 							shipGradeError = false;
 							}
 						else{
 							$("#shipGradeError").hide();
 							shipGradeError = true;
 							}
-					
-						return shipGradeError;
-						}
+						return shipGradeError;							
+					}
 					
 					// SHIPDESC Error
 					function validate_shipDesc(){
@@ -192,7 +199,7 @@
 						validate_enbShip();
 						});
 
-					$("#shipGrade").change(function(){
+					$('input[type="radio"][name="shipGrade"]').change(function(){
 						validate_shipGrade();
 						});
 

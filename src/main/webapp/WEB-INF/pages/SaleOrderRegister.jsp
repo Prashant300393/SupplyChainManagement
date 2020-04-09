@@ -5,210 +5,198 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<style>
-body {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-* {
-	box-sizing: border-box;
-}
-
-input[type=text], select, textarea {
-	width: 55%;
-	padding: 9px;
-	border: 1px solid #ccc;
-	border-radius: 2px;
-	box-sizing: border-box;
-	margin-top: 3px;
-	margin-bottom: 10px;
-	resize: vertical;
-	height: 35%;
-	font-weight: 350;
-}
-
-input[type=submit] {
-	background-color: #4CAF50;
-	color: white;
-	padding: 12px 20px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-input[type=submit]:hover {
-	background-color: #45a049;
-}
-
-input[type=reset] {
-	background-color: #4CAF50;
-	color: white;
-	padding: 12px 20px;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-}
-
-input[type=reset]:hover {
-	background-color: #45a049;
-}
-
-.container {
-	border-radius: 5px;
-	background-color: #d5f4e6;
-	padding: 5px;
-	margin: 30px;
-}
-
-.blinking {
-	animation: blinkingText 1.5s infinite;
-}
-
-@
-keyframes blinkingText { 0%{
-	color: red;
-}
-49%{
-color
-
-
-:
-
- 
-
-red
-
-
-;
-}
-60%{
-color
-
-
-:
-
- 
-
-transparent
-
-
-;
-}
-99%{
-color
-
-
-:transparent
-
-
-;
-}
-100%{
-color
-
-
-:
-
- 
-
-blue
-
-
-;
-}
-}
-</style>
 </head>
 <body>
 	<%@include file="Menu.jsp"%>
-	<span class="blinking"
-		; style="font-weight: bold; text-align: center; font-size: 25px; padding: 20%; margin: 7%">
-		---WELCOME TO SALE ORDER REGISTER PAGE--- </span>
-	<br>
-	<br>
-	<div class="container" style="width: 47%">
-		<form:form action="save" method="post" modelAttribute="saleOrder">
-			<div class="row">
-				<div class="col-3">
-					<form:label path="saleCode">Order Code</form:label>
-				</div>
-				<form:input path="saleCode"/>
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-center bg-primary text-white">
+				<h4>WELCOME TO SALE ORDER REGISTER PAGE</h4>
 			</div>
-			<br>
-			<div class="row">
-				<div class="col-3">
-					<form:label path="shipOb">Shipment Code</form:label>
-				</div>
-				<form:select path="shipOb.shipId">
-					<form:option value="">--select---</form:option>
-					<form:options items="${shipMap}" />
-				</form:select>
+			<div class="card-body">
+				<form:form action="save" method="post" modelAttribute="saleOrder">
+					<div class="row">
+						<div class="col-4">
+							<label for="saleCode">Order Code</label>
+						</div>
+						<div class="col-4">
+							<form:input path="saleCode" class="form-control" />
+						</div>
+						<div class="col-4">
+							<span id="saleCodeError"></span>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-4">
+							<label for="shipOb">Shipment Code</label>
+						</div>
+						<div class="col-4">
+							<form:select path="shipOb.shipId" class="form-control">
+								<form:option value="">--SELECT---</form:option>
+								<form:options items="${shipMap}"/>
+							</form:select>
+						</div>
+						<div class="col-4">
+							<span id="shipObError"></span>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-4">
+							<label for="whCust">Customer</label>
+						</div>
+						<div class="col-4">
+							<form:select path="whCust.userId" class="form-control">
+								<form:option value="">--SELECT---</form:option>
+								<form:options items="${whMap}" />
+							</form:select>
+						</div>
+						<div class="col-4">
+							<span id="whCustError"></span>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-4">
+							<label for="saleRefNo">Reference Number</label>
+						</div>
+						<div class="col-4">
+							<form:input path="saleRefNo" class="form-control" />
+						</div>
+						<div class="col-4">
+							<span id="saleRefNoError"></span>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-4">
+							<label for="stockMode">Stock Mode</label>
+						</div>
+						<div class="col-4">
+							<form:radiobutton path="stockMode" value="Grade" />
+							Grade
+							<form:radiobutton path="stockMode" value="Margin" />
+							Margin
+						</div>
+						<div class="col-4">
+							<span id="stockModeError"></span>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-4">
+							<label for="stockSource">Stock Source</label>
+						</div>
+						<div class="col-4">
+							<form:select path="stockSource" class="form-control">
+								<form:option value="">--SELECT---</form:option>
+								<form:option value="Open">Open</form:option>
+								<form:option value="Avail">Avail</form:option>
+								<form:option value="Refund">Refund</form:option>
+							</form:select>
+						</div>
+						<div class="col-4">
+							<span id="stockSourceError"></span>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-4">
+							<label for="status">DEFAULT STATUS</label>
+						</div>
+						<div class="col-4">
+							<form:input path="status" readonly="true" class="form-control" />
+						</div>
+						<div class="col-4">
+							<span id="statusError"></span>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-4">
+							<label for="saleDesc">Description</label>
+						</div>
+						<div class="col-4">
+							<form:textarea path="saleDesc" class="form-control" />
+						</div>
+						<div class="col-4">
+							<span id="saleDescError"></span>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-4"></div>
+						<div class="col-4">
+							<input id="register" type="submit" value="Create Sale Order" class="btn btn-success btn-center"> 
+							<input id="register"	type="reset" value="Reset" class="btn btn-success btn-center">
+						</div>
+					</div>
+
+				</form:form>
 			</div>
-			<br>
-			<div class="row">
-				<div class="col-3">
-					<form:label path="whCust">Customer</form:label>
-				</div>
-				<form:select path="whCust.userId">
-					<form:option value="">--select---</form:option>
-					<form:options items="${whMap}" />
-				</form:select>
+			<div class="card-footer bg-info text-center text-white">
+				<b>${msg}</b>
 			</div>
-			<br>
-			<div class="row">
-				<div class="col-3">
-					<form:label path="saleRefNo">Reference Number</form:label>
-				</div>
-				<form:input path="saleRefNo"/>
-			</div>
-			<br>
-			<div class="row">
-				<div class="col-3">
-					<form:label path="stockMode">Stock Mode</form:label>
-				</div>
-				<div class="col-4">
-					<form:radiobutton path="stockMode" value="Grade" />
-					Grade
-					<form:radiobutton path="stockMode" value="Margin" />
-					Margin
-				</div>
-			</div>
-			<br>
-			<div class="row">
-				<div class="col-3">
-					<form:label path="stockSource">Stock Source</form:label>
-				</div>
-				<form:select path="stockSource">
-					<form:option value="">--select---</form:option>
-					<form:option value="Open">Open</form:option>
-					<form:option value="Avail">Avail</form:option>
-					<form:option value="Refund">Refund</form:option>
-				</form:select>
-			</div>
-			<br>
-			<div class="row">
-				<div class="col-3">
-					<form:label path="status">DEFAULT STATUS</form:label>
-				</div>
-				<div>
-					<form:input path="status" readonly="true" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-3">
-					<form:label path="saleDesc">Description</form:label>
-				</div>
-				<form:textarea path="saleDesc" />
-			</div>
-			<br>
-			<div class="row">
-				<div class="col-3"></div>
-				<input type="submit" value="Create Sale Order">
-				<div class="col-1"></div>
-				<input type="reset" value="Reset">
-			</div>
-		</form:form>
+		</div>
 	</div>
-	${msg}
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+		// 1. Hide Error Section
+		$('#saleCodeError').hide();
+		$('#shipObError').hide();
+		
+		// 2. Define Error Variable
+		var saleCodeError = false;
+		var shipObError = false;
+
+		// 3. Define Validate Function
+		function validate_saleCode(){
+			var val = $('#saleCode').val();
+			if(val==''){
+				$('#saleCodeError').show();
+				$('#saleCodeError').html('<b>*Please Enter the Code</b>');
+				$('#saleCodeError').css('color', 'red');
+				saleCodeError = false;
+				}
+			else{
+				$('#saleCodeError').hide();
+				saleCodeError = true;
+				}
+			return saleCodeError;
+			}
+
+			// ShipmentCode
+			function validate_shipOb(){
+
+				var val = $('#shipOb.shipId').val();
+				if(val==''){
+					$('#shipObError').show();
+					$('#shipObError').html('<b>*Please Select Shipment Code</b>');
+					$('#shipObError').css('color', 'red');
+					shipObError = false;
+					}
+				else{
+					$('#shipObError').hide();
+					shipObError = true;
+					}
+				return shipObError;
+				}
+		
+		//4. Link Action with Function
+		$('#saleCode').keyup(function(){
+			validate_saleCode();
+			});
+
+		$('#shipOb.shipId').change(function(){
+			validate_shipOb();
+			});
+
+		
+});
+</script>
 </body>
 </html>

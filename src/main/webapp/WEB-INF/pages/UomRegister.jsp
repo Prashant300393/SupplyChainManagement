@@ -29,7 +29,9 @@
 								<form:option value="-NA-">-NA-</form:option>
 							</form:select>
 						</div>
-						<div class="col-4" id="uomTypeError"></div>
+						<div class="col-4" >
+							<span id="uomTypeError"></span>
+						</div>
 					</div>
 					<br>
 					<!--new Row -->
@@ -40,7 +42,9 @@
 						<div class="col-4">
 							<form:input path="uomModel" class="form-control" />
 						</div>
-						<div class="col-4" id="uomModelError"></div>
+						<div class="col-4">
+							<span id="uomModelError"></span>
+						</div>
 					</div>
 					<br>
 					<!--new Row -->
@@ -51,7 +55,9 @@
 						<div class="col-4">
 							<form:textarea path="uomDesc" class="form-control" />
 						</div>
-						<div class="col-4" id="uomDescError"></div>
+						<div class="col-4" >
+							<span id="uomDescError"></span>
+						</div>
 					</div>
 					<br>
 					<div class="row"><div class="col-5"></div>
