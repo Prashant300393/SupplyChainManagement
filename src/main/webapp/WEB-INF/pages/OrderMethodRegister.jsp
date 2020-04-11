@@ -140,13 +140,20 @@
 					// ORDER CODE
 					function validate_orderCode() {
 						var val = $('#orderCode').val();
+						var exp = /^[A-Z]{2,8}$/;
 						if (val == '') {
 							$('#orderCodeError').show();
-							$('#orderCodeError').html(
-									'<b>*Please Enter the Order Code</b>')
+							$('#orderCodeError').html('<b>*Please Enter the Order Code</b>')
 							$('#orderCodeError').css('color', 'red')
 							orderCodeError = false;
-						} else {
+						} 
+						else if(!exp.test(val)){
+							$('#orderCodeError').show();
+							$('#orderCodeError').html('<b>*Please Enter between 2-8 UpperCase Letters</b>')
+							$('#orderCodeError').css('color', 'red')
+							orderCodeError = false;
+							}
+						else {
 							$('#orderCodeError').hide();
 							orderCodeError = true;
 						}
@@ -191,13 +198,20 @@
 					// ORDER DESC
 					function validate_orderDesc() {
 						var val = $('#orderDesc').val();
+						var exp = /^[A-Za-z0-9\_\-\.\ ]{8,150}$/;
 						if (val == '') {
 							$('#orderDescError').show();
-							$('#orderDescError').html(
-									'<b>*Please Enter Description</b>');
+							$('#orderDescError').html('<b>*Please Enter Description</b>');
 							$('#orderDescError').css('color', 'red');
 							orderDescError = false;
-						} else {
+						}
+						else if(!exp.test(val)){
+							$('#orderDescError').show();
+							$('#orderDescError').html('<b>*Please Enter between 8-150 words</b>');
+							$('#orderDescError').css('color', 'red');
+							orderDescError = false;
+							} 
+						else {
 							$('#orderDescError').hide();
 							orderDescError = true;
 

@@ -110,11 +110,17 @@ $(document).ready(function(){
 		function validate_uomModel() {
 
 			var val = $("#uomModel").val();
+			var exp = /^[A-Z]{2,8}$/;
 			if(val==''){
 				$("#uomModelError").show();
 				$("#uomModelError").html("<b>*Please Enter Uom Model</b>");
 				$("#uomModelError").css("color", "red");
-
+				uomModelError = false;
+				}
+			else if(!exp.test(val)){
+				$("#uomModelError").show();
+				$("#uomModelError").html("<b>*Please Enter 2-8 UpperCase Letters</b>");
+				$("#uomModelError").css("color", "red");
 				uomModelError = false;
 				}
 			else{
@@ -129,10 +135,16 @@ $(document).ready(function(){
 		function validate_uomDesc() {
 
 			var val = $("#uomDesc").val();
-
+			var exp = /^[A-Za-z0-9\_\-\.\ ]{8,150}$/;
 			if(val==''){
 				$("#uomDescError").show();
 				$("#uomDescError").html("<b>*Please Enter Description</b>");
+				$("#uomDescError").css("color", "red");
+				uomDescError = false;
+				}
+			else if(!exp.test(val)){
+				$("#uomDescError").show();
+				$("#uomDescError").html("<b>*Please Enter between 8-150 words</b>");
 				$("#uomDescError").css("color", "red");
 				uomDescError = false;
 				}

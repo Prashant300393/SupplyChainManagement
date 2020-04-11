@@ -124,9 +124,15 @@
 					function validate_shipCode(){
 
 						var val = $("#shipCode").val();
+						var exp = /^[A-Z]{2,8}$/;
 						if(val==''){
 							$("#shipCodeError").show();
 							$("#shipCodeError").html("*Please Enter Shipment Code");
+							shipCodeError = false;
+							}
+						else if(!exp.test(val)){
+							$("#shipCodeError").show();
+							$("#shipCodeError").html("*Please Enter between 2-8 UpperCase Letters");
 							shipCodeError = false;
 							}
 						else{
@@ -173,9 +179,15 @@
 					function validate_shipDesc(){
 
 						var val = $("#shipDesc").val();
+						var exp = /^[A-Za-z0-9\_\-\.\ ]{8,150}$/;
 						if(val==''){
 							$("#shipDescError").show();
 							$("#shipDescError").html("*Please Enter Description");
+							shipDescError = false;
+							}
+						else if(!exp.test(val)){
+							$("#shipDescError").show();
+							$("#shipDescError").html("*Please Enter between 8-150 words");
 							shipDescError = false;
 							}
 						else{

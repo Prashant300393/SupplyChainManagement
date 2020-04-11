@@ -3,6 +3,7 @@ package com.amdocs.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,8 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class ShipmentType {
 
 	@Id
-	@GeneratedValue(generator = "generator")
-	@GenericGenerator(name = "generator", strategy = "increment")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "sid")
 	private Integer shipId;
 	@Column(name = "smode")

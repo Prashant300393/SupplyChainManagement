@@ -99,7 +99,7 @@
 					<div class="col-4">
 					</div>
 					<div class="col-4">
-								<label id="ifOther" for="ifOther">Enter Other User ID</label>
+								<label id="ifOther" for="ifOther">Enter Other UserID Type</label>
 						 <form:input path="other" class="form-control"/>
 					</div>	
 					<div class="col-4">
@@ -184,9 +184,16 @@
 		// USERCODE
 		function validate_userCode(){
 				var val = $('#userCode').val();
+				var exp = /^[A-Z]{2,8}$/;
 				if(val==''){
 					$('#userCodeError').show();
 					$('#userCodeError').html("<b>*Please Enter User Code </b>");
+					$('#userCodeError').css("color", "red");
+					userCodeError = false;
+					}
+				else if(!exp.test(val)){
+					$('#userCodeError').show();
+					$('#userCodeError').html("<b>*Please Enter between 2-8 UpperCase Letters </b>");
 					$('#userCodeError').css("color", "red");
 					userCodeError = false;
 					}
@@ -201,9 +208,16 @@
 		function validate_userMail(){
 
 			var val = $('#userMail').val();
+			var exp = /^[A-Za-z0-9\_\-\.]+\@[a-zA-Z]{2,8}\.[a-zA-Z]{2,3}(.in)?$/;
 			if(val==''){
 				$('#userMailError').show();
 				$('#userMailError').html('<b>*Please Enter Your Email </b>');
+				$('#userMailError').css("color", "red");
+				userMailError = false;
+				}
+			else if(!exp.test(val)){
+				$('#userMailError').show();
+				$('#userMailError').html('<b>*Please Enter Valid Email </b>');
 				$('#userMailError').css("color", "red");
 				userMailError = false;
 				}
@@ -218,9 +232,16 @@
 		function validate_userContact(){
 
 			var val = $('#userContact').val();
+			var exp = /^(\+)?(91)?[6-9][0-9]{9}$/;
 			if(val==''){
 				$('#userContactError').show();
 				$('#userContactError').html('*<b>Please Enter Your Contact</b>');
+				$('#userContactError').css("color", "red");
+				userContactError = false;
+				}
+			else if(!exp.test(val)){
+				$('#userContactError').show();
+				$('#userContactError').html('*<b>Please Enter VALID Contact</b>');
 				$('#userContactError').css("color", "red");
 				userContactError = false;
 				}
@@ -277,9 +298,16 @@
 		function validate_idNumber()	{
 
 			var val = $('#idNumber').val();
+			var exp = /^[A-Za-z0-9\_\-\.]{4,19}$/;
 			if(val==''){
 				$('#idNumberError').show();
 				$('#idNumberError').html('<b>*Please Enter ID Number </b>');
+				$('#idNumberError').css("color", "red");
+				idNumberError = false;
+				}
+			else if(!exp.test(val)){
+				$('#idNumberError').show();
+				$('#idNumberError').html('<b>*Please Enter VALID ID Number </b>');
 				$('#idNumberError').css("color", "red");
 				idNumberError = false;
 				}
