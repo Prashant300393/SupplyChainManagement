@@ -8,6 +8,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.amdocs.model.WhUserType;
 import com.amdocs.service.IWhUserTypeService;
 import com.amdocs.util.WhUserTypeUtil;
+import com.amdocs.validator.WhUserTypeValidator;
 import com.amdocs.view.WhUserTypeExcelView;
 import com.amdocs.view.WhUserTypePdfView;
 
@@ -24,6 +26,9 @@ import com.amdocs.view.WhUserTypePdfView;
 @RequestMapping("/whuser")
 public class WhUserTypeController {
 
+	@Autowired
+	private WhUserTypeValidator validator;
+	
 	@Autowired
 	private IWhUserTypeService service;
 
@@ -56,14 +61,22 @@ public class WhUserTypeController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String saveWhUser(
 			@ModelAttribute WhUserType whUserType,
+			Errors errors,
 			Model model
 			)
 	{
-		Integer id = service.saveWhUserType(whUserType);
-		String msg = "WhUserType ' "+id+" ' Saved...!!!!! ";
-		//		String msg1 = "WhuserType"+id+"Saved";
-		model.addAttribute("msg", msg);		
-		model.addAttribute("whUserType", new WhUserType());
+		// call validator validate() method
+		validator.validate(whUserType, errors);
+		// check errors are added or not using errors.hasErrors() method
+		
+		if( !errors.hasErrors() ) { // if errors not exist then only save
+			Integer id = service.saveWhUserType(whUserType);
+			model.addAttribute("msg", "WhUserType ' "+id+" ' Saved...!!!!! ");		
+			model.addAttribute("whUserType", new WhUserType());
+		}
+		else { // errors are exist then Display Errors at UI
+			model.addAttribute("msg", "Please check all Errors...!!!!! ");		
+		}
 		return "WhUserTypeRegister";
 	}
 

@@ -20,5 +20,12 @@ public interface IWhUserTypeService {
 
 	List<Object[ ]> getWhUserTypeIdAndCode(String userType);
 	
+	// SERVER SIDE VALIDATION METHODS 
+	boolean isUserCodeExist(String userCode);
+	
+	boolean isUserMailExist(String userMail);
+	
+	boolean isUserContactExist(String userContact);
+	
 	
 }

@@ -38,6 +38,7 @@
 					</div>
 					<div class="col-4">
 				  		<span id="userCodeError"></span>
+						<form:errors path="userCode"   cssClass="text-danger" />
 				  	</div>
 				</div>
 				<br>
@@ -62,6 +63,7 @@
 					</div>
 					<div class="col-4">
 				  		<span id="userMailError"></span>
+				  		<form:errors path="userMail" cssClass="text-danger"/>
 				  	</div>
 				</div>
 				<br>
@@ -74,6 +76,7 @@
 				</div>	
 					<div class="col-4">
 				  		<span id="userContactError"></span>
+				  		<form:errors path="userContact"  cssClass="text-danger"/>
 				  	</div>
 				</div>	
 				<br>
@@ -137,6 +140,7 @@
 		// 1.  Hide ERROR section
 		$('#userTypeError').hide();
 		$('#userCodeError').hide();
+		$('#userForError').hide();
 		$('#userMailError').hide();
 		$('#userContactError').hide();
 		$('#userIdTypeError').hide();
@@ -148,6 +152,7 @@
 		// 2. Define ERROR variable
 		var userTypeError = false;
 		var userCodeError = false;
+		var userForError = false;
 		var userMailError = false;
 		var userContactError = false;
 		var userIdTypeError = false;
@@ -164,12 +169,16 @@
 					$('#userTypeError').hide();
 					$('#userFor').val('Purchase');
 					$('#userFor').css('color', 'blue');
+					$('#userForError').hide();
+					userForError = true;
 					userTypeError = true;
 					}
 				else if(val=='Customer'){
 					$('#userTypeError').hide();
 					$('#userFor').val('Sale');
 					$('#userFor').css('color', 'blue');
+					$('#userForError').hide();
+					userForError = true;
 					userTypeError = true;	
 					}
 				else{
@@ -204,6 +213,22 @@
 				return userCodeError;
 			}		
 
+		// USER FOR
+		function validate_userFor(){
+			var val = $('#userFor').val();
+			if(val==''){
+				$('#userForError').show();
+				$('#userForError').html('<b>*Please Choose one "UserType" Above for "User For"</b>');
+				$('#userForError').css("color", "red");
+				userForError = false;
+				}
+			else{
+				$('#userForError').hide();
+				userForError = true;
+				}
+			return userForError;
+			}
+		
 		// USEREMAIL
 		function validate_userMail(){
 
@@ -328,6 +353,10 @@
 			validate_userCode();
 			});
 
+		$('#userFor').change(function(){
+			validate_userFor();
+			});
+
 		$('#userMail').keyup(function(){
 			validate_userMail();
 			});
@@ -354,6 +383,7 @@
 
 			userTypeError = false;
 			userCodeError = false;
+			userForError = false;
 			userMailError = false;
 			userContactError = false;
 			userIdTypeError = false;
@@ -361,12 +391,13 @@
 
 			validate_userType();
 			validate_userCode();
+			validate_userFor();
 			validate_userMail();
 			validate_userContact();
 			validate_userIdType();
 			validate_idNumber();
 					
-			if(userTypeError && userCodeError && userMailError && userContactError && userIdTypeError && idNumberError )	
+			if(userTypeError && userCodeError && userForError && userMailError && userContactError && userIdTypeError && idNumberError )	
 			{
 				return true;
 			}

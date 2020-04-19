@@ -20,6 +20,9 @@ public interface IWhUserTypeDao {
 	
 	List<Object[ ]> getWhUserTypeIdAndCode(String userType); // integration dropdown
 
+	boolean isUserCodeExist(String userCode);
 	
+	boolean isUserMailExist(String userMail);
 	
+	boolean isUserContactExist(String userContact);
 }
