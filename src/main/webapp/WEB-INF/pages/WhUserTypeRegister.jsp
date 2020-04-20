@@ -38,9 +38,8 @@
 					</div>
 					<div class="col-4">
 				  		<span id="userCodeError"></span>
-						<form:errors path="userCode"   cssClass="text-danger" />
 				  	</div>
-				</div>
+				  </div>
 				<br>
 				<div class="row">
 					<div class="col-4">
@@ -378,6 +377,10 @@
 			validate_other();
 			});
 
+		$("#userCode").blur(function(){
+			validate_userCode_ajax();
+		});
+
 		// On Click SUBMIT button
 		$('#register').click(function(){
 
@@ -407,6 +410,26 @@
 			}
 
 		});
+
+		// JQuery AJAX function call
+		function validate_userCode_ajax(){
+		     var val = $("#userCode").val();
+		     $.ajax({
+		     	url : 'codeExist',
+		     	data : { "userCode": $("#userCode").val()},
+		     	success : function(resTxt){
+		          if(resTxt!=''){
+			          	 $("#userCodeError").show();
+		     	         $("#userCodeError").html(resTxt);
+		     	         $("#userCodeError").css("color","red");
+		     	         $("#userCode").focus();//place cursor back
+		          }else{
+		          	$("#userCodeError").hide();
+		          	$("#userCodeError").html("");
+		          }
+		     	}
+		     });
+		  }
 		
 });
 </script>

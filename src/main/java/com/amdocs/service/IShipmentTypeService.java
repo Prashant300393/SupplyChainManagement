@@ -21,4 +21,7 @@ public interface IShipmentTypeService {
 	public List<Object[ ]> getShipmentModeCount();
 
 	List<Object[ ]> getShipmentTypeIdAndCode();
+	
+	boolean isShipmentCodeExsit(String shipCode);
+	
 }

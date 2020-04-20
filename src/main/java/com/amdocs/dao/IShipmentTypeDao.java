@@ -21,5 +21,7 @@ public interface IShipmentTypeDao {
 
 
 	List<Object[ ]> getShipmentTypeIdAndCode();
+
+	boolean isShipmentCodeExsit(String shipCode);
 	
 }

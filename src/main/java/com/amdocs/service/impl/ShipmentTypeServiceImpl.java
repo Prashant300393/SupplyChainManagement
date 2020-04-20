@@ -23,7 +23,7 @@ public class ShipmentTypeServiceImpl implements IShipmentTypeService {
 		return dao.saveShipmentType(ob);
 	}
 
-	@Transactional(readOnly = false)	// SELECT OPERATION
+	@Transactional(readOnly = true)	// SELECT OPERATION
 	public List<ShipmentType> getAllShipmentTypes() {
 
 		List<ShipmentType> list = dao.getAllShipmentTypes();
@@ -59,9 +59,14 @@ public class ShipmentTypeServiceImpl implements IShipmentTypeService {
 		return dao.getShipmentModeCount();
 	}
 	
-	@Override
-	public List<Object[]> getShipmentTypeIdAndCode() {
+	@Transactional(readOnly = true)
+	public List<Object[ ]> getShipmentTypeIdAndCode() {
 		return dao.getShipmentTypeIdAndCode();
 	}
-
+	
+	@Transactional(readOnly = true)
+	public boolean isShipmentCodeExsit(String shipCode) {
+		return dao.isShipmentCodeExsit(shipCode);
+	}
+	
 }

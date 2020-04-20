@@ -5,13 +5,18 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"
+	integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
 	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
+
+<!-- JQuery & AJAX Link -->
+<script  src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<!-- Bootstrap link -->
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	
 <link href="../resources/css/ShipmentTypeRegister.css" rel="stylesheet"
 	type="text/css">
 </head>
@@ -84,7 +89,7 @@
 		</form:form>
 		${msg}
 	</div>
-	<script type="text/javascript">
+	<script>
 		$(document).ready(
 				function() {
 					// 1. Hide error section
@@ -203,9 +208,9 @@
 							validate_shipMode();
 						});
 
-					$("#shipCode").keyup(function(){
+ 					$("#shipCode").keyup(function(){
 							validate_shipCode();
-						});
+						}); 
 
 					$("#enbShip").change(function(){
 						validate_enbShip();
@@ -219,6 +224,11 @@
 						validate_shipDesc();
 						});
 
+					$("#shipCode").blur(function(){
+						validate_shipCode_ajax();
+					});
+					
+					
 					// ON CLICK Submit Form
 					$("#register").click(function(){
 
@@ -239,12 +249,35 @@
 						// 3. Submit only if All are TRUE
 						if(shipModeError && shipCodeError && enbShipError && shipGradeError && shipDescError ){
 							return true;
-							}
+						}
 						else{
 							return false;
 							}
 				});
-	});
-	</script>
+
+					/* JQuery AJAX function */
+					function validate_shipCode_ajax(){
+					     var val = $("#shipCode").val();
+
+					     $.ajax({
+					     	url : 'codeExist',
+					     	data: { "code": $("#shipCode").val()},
+					     	success:function(resTxt){
+					          if(resTxt!=''){
+					          	 $("#shipCodeError").show();
+					     	         $("#shipCodeError").html(resTxt);
+					     	         $("#shipCodeError").css("color","red");
+					     	         $("#shipCode").focus();//place cursor back
+					          }else{
+					          	$("#shipCodeError").hide();
+					          	$("#shipCodeError").html("");
+					          }
+					     	}	
+					     });
+					  }
+			
+});
+
+</script>
 </body>
 </html>

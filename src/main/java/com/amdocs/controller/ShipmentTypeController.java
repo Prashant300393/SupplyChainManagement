@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.amdocs.model.ShipmentType;
@@ -235,5 +236,26 @@ public class ShipmentTypeController {
 		util.generateBarChart(path, list);	
 		return "ShipmentTypeCharts";
 	}
+	
+	/**
+	 * AJAX call method which Returns Message as String to check DATA exist or NOT..?
+	 * @ResponseBody is used to tell thata return type is String, NOT A PAGENAME
+	 * @RequestParam will read the "key"(i.e. code) which is coming from UI AJAX FUNCTION
+	 * Return type must be String to send as Response to AJAX that "code" exist or not
+	 */
+	@RequestMapping("/codeExist")
+	public @ResponseBody String codeExist(
+			@RequestParam ("code")String code
+			) 
+	{
+		String msg = null;
+		System.out.println(code);
+		System.out.println(service.isShipmentCodeExsit(code));
+		// call method to check, if its TRUE, DATA EXIST ALREADY
+		if(service.isShipmentCodeExsit(code)) 
+			msg = code+ " already Exist";
+		return msg;
+	}
+	
 
 }

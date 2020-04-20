@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.amdocs.model.WhUserType;
@@ -228,7 +229,21 @@ public class WhUserTypeController {
 		return "WhUserTypeCharts";
 	}
 	
-	
+	// AJAX FUNCTION
+	@RequestMapping("/codeExist")
+	public @ResponseBody String isCodeExist(
+			@RequestParam("userCode")String userCode
+			)
+	{
+		System.out.println("WhUserTypeController.isCodeExist()");
+		String message="";
+		boolean exist=service.isUserCodeExist(userCode);
+		System.out.println(exist);
+		if(exist) {
+			message=userCode+" already exist";
+		}
+		return message;
+	}
 	
 	
 	
