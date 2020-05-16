@@ -39,5 +39,11 @@ public class PartDaoImpl implements IPartDao {
 	public void updatePart(Part ob) {
 		ht.update(ob);
 	}
-
+	
+	@SuppressWarnings({ "deprecation", "unchecked" })
+	@Override
+	public List<Object[]> getPartIdAndCodes() {
+		String hql = "select partId, partCode from "+Part.class.getName();
+		return (List<Object[]>) ht.find(hql);
+	}
 }

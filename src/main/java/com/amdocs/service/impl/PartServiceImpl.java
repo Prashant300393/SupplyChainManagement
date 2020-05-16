@@ -46,4 +46,9 @@ public class PartServiceImpl implements IPartService {
 		dao.updatePart(ob);
 	}
 	
+	@Transactional(readOnly = true)
+	public List<Object[]> getPartIdAndCodes() {
+		return dao.getPartIdAndCodes();
+	}
+	
 }

@@ -1,12 +1,16 @@
 package com.amdocs.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +31,7 @@ public class PurchaseOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
+
 	@Column(name = "ordercode")
 	private String poOrderCode;
 	
@@ -37,6 +42,11 @@ public class PurchaseOrder {
 	@ManyToOne
 	@JoinColumn(name = "whUserIdFk")
 	private WhUserType whVendor;
+
+	// We want to Fetch all PurchaseDtls, when we get the Parent..Thats why Bidirectional we have to use
+	@OneToMany(mappedBy = "po", fetch = FetchType.EAGER)
+	private List<PurchaseDtl> childDtl;
+	
 	
 	@Column(name = "refnumber")
 	private String poRefNum;
@@ -46,5 +56,5 @@ public class PurchaseOrder {
 	private String poStatus;
 	@Column(name = "note")
 	private String poDesc;
-	
+
 }

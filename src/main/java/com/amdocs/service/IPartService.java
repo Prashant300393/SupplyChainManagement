@@ -14,4 +14,7 @@ public interface IPartService {
 	Part getOnePart(Integer id);
 
 	void updatePart(Part ob);
+
+	List<Object[ ]> getPartIdAndCodes();
+	
 }

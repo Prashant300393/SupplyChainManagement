@@ -55,7 +55,4 @@ public class OrderMethodDaoImpl implements IOrderMethodDao {
 	}
 	
 	
-	
-	
-	
 }
