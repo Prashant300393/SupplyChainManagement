@@ -62,6 +62,10 @@
 											<a href="downloadInvoice?poId=${ob.id}"
 												class="btn btn-info">DOWNLOAD INVOICE</a>
 										</c:when>
+										<c:when test="${'RECEIVED' eq ob.poStatus}">
+											<a href="#"
+												class="text-success"><b>RECEIVED</b></a>
+										</c:when>
 										<c:otherwise>
 											<b class="text-danger">ORDER MUST BE PLACED</b>
 										</c:otherwise>

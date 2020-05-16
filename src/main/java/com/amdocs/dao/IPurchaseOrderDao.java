@@ -23,5 +23,8 @@ public interface IPurchaseOrderDao {
 	void deletePurchaseDtl(Integer id);
 	
 	void updatePoStatus(Integer poId, String status);
+
+	List<Object[ ]> getPurchaseIdAndCode();
+	
 	
 }

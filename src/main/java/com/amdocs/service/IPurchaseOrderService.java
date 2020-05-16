@@ -23,5 +23,7 @@ public interface IPurchaseOrderService {
 	
 	public void updatePoStatus(Integer poId, String status);
 
+	List<Object[ ]> getPurchaseIdAndCode();
+	
 }
 

@@ -2,8 +2,13 @@ package com.amdocs.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateCallback;
 import org.springframework.orm.hibernate5.HibernateTemplate;
@@ -75,5 +80,43 @@ public class PurchaseOrderDaoImpl implements IPurchaseOrderDao {
 		});
 	}
 
+	@Override
+	public List<Object[]> getPurchaseIdAndCode() {
+		List<Object[]> result = 
+				ht.execute(new HibernateCallback<List<Object[ ]>>() {
+
+					@SuppressWarnings({ "rawtypes", "unchecked" })
+					@Override
+					public List<Object[]> doInHibernate(Session session) throws HibernateException 
+					{
+
+						/*				String hql = " select id, poOrderCode from "+PurchaseOrder.class.getName()+" where poStatus = 'INVOICED' ";
+										Query query = session.createQuery(hql);
+										List<Object[ ]> list = query.list();
+										return list;
+						 */	
+						
+						// get CriteriaBuilder using SESSION
+						CriteriaBuilder builder = session.getCriteriaBuilder();
+						// set Output type
+						CriteriaQuery<Object[ ]> query = builder.createQuery(Object[ ].class);
+						// set From 
+						Root<PurchaseOrder> root = query.from(PurchaseOrder.class);
+						// specify select clause
+						query.multiselect(root.get("id"), root.get("poOrderCode"));
+						
+						// where condition
+						query.where(builder.equal(root.get("poStatus"), "INVOICED"));
+						
+						// execute query
+						Query<Object[ ]> q = session.createQuery(query);
+						
+						List<Object[ ]> list = q.list();
+						
+						return list;
+					}
+				});
+		return result ;
+	}
 
 }

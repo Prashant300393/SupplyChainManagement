@@ -17,7 +17,6 @@ import com.lowagie.text.Document;
 import com.lowagie.text.FontFactory;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfTable;
 import com.lowagie.text.pdf.PdfWriter;
 
 public class VendorInvoicePdf  extends AbstractPdfView{
@@ -48,9 +47,9 @@ public class VendorInvoicePdf  extends AbstractPdfView{
 		// get the Child(PurchaseDtl parts) from the PO
 		List<PurchaseDtl> parts = po.getChildDtl();
 		
-		double finalCost=0;
+		double finalCost=0.0;
 		for(PurchaseDtl dtl : parts) {
-			finalCost+=dtl.getPart().getBaseCost()*dtl.getQty();
+			finalCost=finalCost+(dtl.getPart().getBaseCost()*dtl.getQty());
 		}
 
 		PdfPTable tableHeader = new PdfPTable(4);

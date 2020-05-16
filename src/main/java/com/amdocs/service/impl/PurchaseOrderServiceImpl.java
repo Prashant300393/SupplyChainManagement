@@ -68,7 +68,10 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 		dao.updatePoStatus(poId, status);
 	}
 
-
+	@Transactional(readOnly = true)
+	public List<Object[]> getPurchaseIdAndCode() {
+		return dao.getPurchaseIdAndCode();
+	}
 
 
 
