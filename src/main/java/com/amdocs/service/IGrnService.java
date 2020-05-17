@@ -3,6 +3,7 @@ package com.amdocs.service;
 import java.util.List;
 
 import com.amdocs.model.Grn;
+import com.amdocs.model.GrnDtl;
 
 public interface IGrnService {
 
@@ -16,5 +17,6 @@ public interface IGrnService {
 	
 	Grn getOneGrn(Integer id);
 	
+	Integer saveGrnDtl(GrnDtl dtl	);
 	
 }

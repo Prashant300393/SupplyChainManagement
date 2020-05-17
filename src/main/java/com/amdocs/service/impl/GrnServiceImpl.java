@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.amdocs.dao.IGrnDao;
 import com.amdocs.model.Grn;
+import com.amdocs.model.GrnDtl;
 import com.amdocs.service.IGrnService;
 
 @Service
@@ -41,6 +42,10 @@ public class GrnServiceImpl implements IGrnService {
 		return dao.getOneGrn(id);
 	}
 	
-	
+	@Override
+	@Transactional
+	public Integer saveGrnDtl(GrnDtl dtl) {
+		return dao.saveGrnDtl(dtl);
+	}
 	
 }

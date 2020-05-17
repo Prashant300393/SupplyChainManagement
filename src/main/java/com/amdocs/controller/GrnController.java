@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import com.amdocs.model.Grn;
+import com.amdocs.model.GrnDtl;
+import com.amdocs.model.PurchaseDtl;
+import com.amdocs.model.PurchaseOrder;
 import com.amdocs.service.IGrnService;
 import com.amdocs.service.IPurchaseOrderService;
 import com.amdocs.util.CommonUtil;
@@ -48,6 +51,10 @@ public class GrnController {
 			) 
 	{
 		Integer id = service.saveGrn(grn);
+		
+		// this method has the logic to save GrnDtl in DB
+		mapPoDtltoGrnDtlAndSave(grn);   // One PoDtl--------->>One GrnDtl
+		
 		model.addAttribute("msg", "Grn created with "+id);
 		poService.updatePoStatus(grn.getPo().getId(), "RECEIVED");
 		model.addAttribute("grn", new Grn());
@@ -95,5 +102,50 @@ public class GrnController {
 		map.addAttribute("list",list);
 		return "GrnData";
 	}
+
+
+	//---------------------------Screen #2 Method---------------------------------------
+
+	/**
+	 * This method is used to get One PODTL and set to GRNDTL as it is for Screen #2
+	 * But ToDo this..we have only GRN, by using GRN, we have to get PoId, then One PO, then PoDtl and set to GrnDtl
+	 */
+	public void mapPoDtltoGrnDtlAndSave(Grn grn) {
+		// Get Po Id using Grn
+		Integer poId = grn.getPo().getId();
+		// Get One Po using PoId
+		PurchaseOrder po = poService.getOnePurchaseOrder(poId);
+		// Using PO get the PoDtl as List
+		List<PurchaseDtl> poDtl = po.getChildDtl();
+
+		// now Create GrnDtl and set the PoDtl to GrnDtl
+		for(PurchaseDtl dtl : poDtl) {
+			GrnDtl grnDtl = new GrnDtl();
+			grnDtl.setPartCode(dtl.getPart().getPartCode());
+			grnDtl.setBaseCost(dtl.getPart().getBaseCost());
+			grnDtl.setQty(dtl.getQty());
+			grnDtl.setPartStatus("NONE");
+
+			// link with Grn(Screen #1)
+			grnDtl.setGrn(grn);
+			// finally save into DB
+			service.saveGrnDtl(grnDtl);
+		}// for
+
+	}
+
+	@RequestMapping("/viewGrnDtls")
+	public String showGrnParts(
+			@RequestParam("id") Integer id
+			)	
+	{
+		
+		return "GrnParts";
+	}
+
+
+
+
+
 
 }

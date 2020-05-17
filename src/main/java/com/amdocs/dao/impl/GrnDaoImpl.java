@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.amdocs.dao.IGrnDao;
 import com.amdocs.model.Grn;
+import com.amdocs.model.GrnDtl;
 
 @Repository
 public class GrnDaoImpl implements IGrnDao {
@@ -37,12 +38,14 @@ public class GrnDaoImpl implements IGrnDao {
 		ht.delete(grn);
 	}
 	
-	
 	@Override
 	public Grn getOneGrn(Integer id) {
 		return ht.get(Grn.class, id);
 	}
 	
-	
+	@Override
+	public Integer saveGrnDtl(GrnDtl dtl) {
+		return (Integer)ht.save(dtl);
+	}
 	
 }

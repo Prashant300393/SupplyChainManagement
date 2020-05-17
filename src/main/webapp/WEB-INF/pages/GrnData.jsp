@@ -17,13 +17,14 @@
 						<td>GRNCODE</td>
 						<td>GRNTYPE</td>
 						<td>NOTE</td>
-						<td colspan='2'>OPERATIONS</td>
+						<td colspan='3'>OPERATIONS</td>
 					</tr>
 					<c:forEach items="${list}" var="ob">
 						<tr>
 							<td><c:out value="${ob.grnCode}" /></td>
 							<td><c:out value="${ob.grnType}" /></td>
 							<td><c:out value="${ob.note}" /></td>
+							<td><a href='viewGrnDtls?id=${ob.id}'>VIEW PARTS</a></td>
 							<td><a href='delete?id=${ob.id}'>DELETE</a></td>
 							<td><a href='edit?id=${ob.id}'>EDIT</a></td>
 						</tr>

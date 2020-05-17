@@ -3,6 +3,7 @@ package com.amdocs.dao;
 import java.util.List;
 
 import com.amdocs.model.Grn;
+import com.amdocs.model.GrnDtl;
 
 public interface IGrnDao {
 	
@@ -16,6 +17,8 @@ public interface IGrnDao {
 	
 	Grn getOneGrn(Integer id);
 	
+	//***************Screen #2 ***********
 	
+	Integer saveGrnDtl(GrnDtl dtl	);
 	
 }
